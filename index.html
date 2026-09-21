@@ -1,79 +1,2557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anthony Sonsona Umapas | Digital Lab</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anthonio's Digital Lab — Anthony Sonsona Umapas</title>
+<meta name="description" content="Personal portfolio of Anthony Sonsona Umapas, 3rd Year Computer Engineering Student at CIT-U."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Manrope',system-ui,-apple-system,sans-serif;transition:background 0.4s,color 0.4s;min-height:100vh;overflow-x:hidden;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+ul{list-style:none;}
 
-  <header class="hero">
-    <div class="hero-text">
-      <p class="eyebrow">Systems Architect &middot; Researcher &middot; CIT-U BSCpE Cohort</p>
-      <h1>Anthony Sonsona Umapas</h1>
-      <p class="tagline">
-        3rd Year BSCpE Scholar at Cebu Institute of Technology &ndash; University.
-        Architecting resilient systems at the convergence of bare-metal telemetry,
-        high-throughput backend schemas, and deterministic software engineering.
-      </p>
-      <blockquote class="creed">
-        <p>&ldquo;It always seems impossible until it's done.&rdquo;</p>
-        <cite>Nelson Mandela &mdash; Personal Engineering Creed</cite>
-      </blockquote>
-      <div class="hero-actions">
-        <a href="#about" class="btn btn-primary">Explore Works</a>
-        <a href="#contact" class="btn btn-outline">Get In Touch</a>
+/* Font Utilities */
+.font-mono{font-family:'JetBrains Mono','Courier New',monospace!important;}
+.font-serif{font-family:'Playfair Display',Georgia,serif!important;}
+.font-sans{font-family:'Manrope',system-ui,sans-serif!important;}
+
+/* ═══════════════════════════════════════════════
+   CSS VARIABLES — MODES
+═══════════════════════════════════════════════ */
+:root{
+  --red:#E02B38;
+  --red-dim:rgba(224,43,56,0.15);
+  --red-glow:rgba(224,43,56,0.4);
+  --offwhite:#F5F4F0;
+  --gray:#8E8E93;
+  --black:#09090B;
+  --transition:0.35s ease;
+}
+
+/* DAY LAB */
+body.mode-day{
+  --bg:#F5F4F0;--bg2:#ECEAE4;--bg3:#E3E1DA;
+  --text:#09090B;--text2:#3A3A3C;--text3:#8E8E93;
+  --card:#FFFFFF;--card2:#F0EFEA;
+  --border:#D8D7D1;--border2:#C8C7C0;
+  --nav-bg:rgba(245,244,240,0.92);
+  --glow:none;
+  background:var(--bg);color:var(--text);
+}
+/* NIGHT LAB */
+body.mode-night{
+  --bg:#09090B;--bg2:#111113;--bg3:#18181B;
+  --text:#F5F4F0;--text2:#C4C4C6;--text3:#8E8E93;
+  --card:#18181B;--card2:#1C1C1F;
+  --border:#2C2C2E;--border2:#3A3A3C;
+  --nav-bg:rgba(9,9,11,0.92);
+  --glow:0 0 20px var(--red-glow);
+  background:var(--bg);color:var(--text);
+}
+/* DEV MODE */
+body.mode-dev{
+  --bg:#0A0F0A;--bg2:#0D130D;--bg3:#111A11;
+  --text:#00FF41;--text2:#00C832;--text3:#006614;
+  --card:#0D130D;--card2:#111A11;
+  --border:#004D14;--border2:#00C832;
+  --nav-bg:rgba(10,15,10,0.95);
+  --glow:0 0 15px rgba(0,255,65,0.3);
+  background:var(--bg);color:var(--text);
+  font-family:'Courier New',Courier,monospace!important;
+}
+body.mode-dev *{font-family:'Courier New',Courier,monospace!important;}
+/* CREATIVE MODE */
+body.mode-creative{
+  --bg:#0F0A1A;--bg2:#160E26;--bg3:#1C1232;
+  --text:#F0EAFF;--text2:#C9B8F5;--text3:#8E7EC4;
+  --card:#1C1232;--card2:#231640;
+  --border:#3D2E6A;--border2:#6E4FBE;
+  --nav-bg:rgba(15,10,26,0.95);
+  --glow:0 0 25px rgba(110,79,190,0.4);
+  background:var(--bg);color:var(--text);
+}
+body.mode-creative .accent{color:#B57BFF!important;}
+body.mode-creative .btn-primary{background:linear-gradient(135deg,#6E4FBE,#B57BFF)!important;}
+
+/* ═══════════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════════ */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:var(--nav-bg);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.35s;
+}
+.nav-logo{
+  font-size:1rem;font-weight:700;letter-spacing:0.08em;
+  color:var(--text);display:flex;align-items:center;gap:0.5rem;
+}
+.nav-logo .dot{color:var(--red);}
+.nav-links{display:flex;align-items:center;gap:0.1rem;}
+.nav-links a{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text3);padding:0.4rem 0.6rem;border-radius:4px;
+  transition:color 0.2s,background 0.2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--red);background:var(--red-dim);}
+.nav-right{display:flex;align-items:center;gap:0.5rem;}
+.mode-btn{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.08em;
+  padding:0.35rem 0.7rem;border-radius:4px;
+  border:1px solid var(--border);color:var(--text3);
+  transition:all 0.2s;background:transparent;
+  white-space:nowrap;
+}
+.mode-btn:hover,.mode-btn.active{border-color:var(--red);color:var(--red);background:var(--red-dim);}
+.hamburger{display:none;flex-direction:column;gap:5px;padding:4px;background:transparent;border:none;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:0.3s;}
+.mobile-menu{
+  display:none;position:fixed;top:60px;left:0;right:0;z-index:999;
+  background:var(--nav-bg);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);padding:1rem 1.5rem;
+  flex-direction:column;gap:0.5rem;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{
+  font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text3);padding:0.6rem 0.5rem;border-radius:4px;
+  transition:color 0.2s,background 0.2s;
+}
+.mobile-menu a:hover{color:var(--red);background:var(--red-dim);}
+.mobile-modes{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem;padding-top:0.5rem;border-top:1px solid var(--border);}
+
+/* ═══════════════════════════════════════════════
+   SECTIONS BASE
+═══════════════════════════════════════════════ */
+section{padding:6rem 0;}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.section-label{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.75rem;
+}
+.section-title{font-size:2.2rem;font-weight:800;line-height:1.2;margin-bottom:1rem;}
+.section-sub{font-size:1rem;color:var(--text3);max-width:600px;line-height:1.7;}
+.section-header{margin-bottom:3rem;}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding-top:60px;
+}
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:40px 40px;opacity:0.4;
+}
+.hero-circuit{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.hero-content{position:relative;z-index:1;text-align:center;max-width:800px;padding:2rem;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--red);border:1px solid var(--red);border-radius:100px;
+  padding:0.4rem 1rem;margin-bottom:2rem;background:var(--red-dim);
+}
+.hero-badge::before{content:'●';font-size:0.5rem;animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.2;}}
+.hero-name{
+  font-size:clamp(2.2rem,6vw,4rem);font-weight:900;
+  letter-spacing:-0.02em;line-height:1.05;margin-bottom:0.5rem;
+}
+.hero-name .last{color:var(--red);}
+.hero-title{
+  font-size:clamp(0.9rem,2.5vw,1.1rem);color:var(--text3);
+  font-weight:500;margin-bottom:0.3rem;letter-spacing:0.05em;
+}
+.hero-school{font-size:0.85rem;color:var(--text3);margin-bottom:2rem;}
+.hero-tagline{
+  font-size:clamp(1rem,2.5vw,1.2rem);font-style:italic;
+  color:var(--text2);margin-bottom:2.5rem;
+  border-left:3px solid var(--red);padding-left:1rem;text-align:left;
+  max-width:500px;margin-left:auto;margin-right:auto;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  background:var(--red);color:#fff;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.75rem 1.8rem;border-radius:6px;border:2px solid var(--red);
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem;
+}
+.btn-primary:hover{background:transparent;color:var(--red);}
+.btn-outline{
+  background:transparent;color:var(--text);
+  font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.75rem 1.8rem;border-radius:6px;border:2px solid var(--border2);
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem;
+}
+.btn-outline:hover{border-color:var(--red);color:var(--red);}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text3);
+}
+.hero-scroll-line{
+  width:1px;height:40px;background:linear-gradient(to bottom,var(--red),transparent);
+  animation:scrollLine 2s infinite;
+}
+@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* Floating elements hero */
+.float-el{
+  position:absolute;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;
+  color:var(--red);opacity:0.4;font-family:'Courier New',monospace;
+  animation:floatEl 8s ease-in-out infinite;pointer-events:none;
+}
+@keyframes floatEl{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+/* ═══════════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════════ */
+.card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:1.5rem;
+  transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s;
+  box-shadow:var(--glow);
+}
+.card:hover{border-color:var(--red);transform:translateY(-2px);}
+.card-label{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.75rem;
+}
+.card-title{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;}
+.card-text{font-size:0.88rem;color:var(--text3);line-height:1.7;}
+
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+#about .about-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
+}
+.about-main{
+  grid-column:1/-1;
+  display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+}
+@media(max-width:700px){.about-main{grid-template-columns:1fr;}}
+.about-avatar{
+  width:80px;height:80px;border-radius:50%;
+  background:var(--red-dim);border:2px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;font-weight:900;color:var(--red);margin-bottom:1rem;letter-spacing:-0.02em;
+}
+.interest-tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;}
+.tag{
+  font-size:0.72rem;font-weight:600;letter-spacing:0.05em;
+  padding:0.3rem 0.75rem;border-radius:100px;
+  border:1px solid var(--border2);color:var(--text3);
+  transition:border-color 0.2s,color 0.2s,background 0.2s;
+}
+.tag:hover,.tag.tech{border-color:var(--red);color:var(--red);background:var(--red-dim);}
+
+/* ═══════════════════════════════════════════════
+   EDUCATION TIMELINE
+═══════════════════════════════════════════════ */
+.timeline{position:relative;padding-left:2rem;}
+.timeline::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:2px;background:linear-gradient(to bottom,var(--red),transparent);
+}
+.timeline-item{position:relative;margin-bottom:2.5rem;}
+.timeline-dot{
+  position:absolute;left:-2.5rem;top:0.2rem;
+  width:12px;height:12px;border-radius:50%;border:2px solid var(--red);
+  background:var(--bg);
+}
+.timeline-dot.active{background:var(--red);}
+.timeline-year{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.1em;
+  color:var(--red);text-transform:uppercase;margin-bottom:0.25rem;
+}
+.timeline-school{font-size:1rem;font-weight:700;}
+.timeline-level{font-size:0.8rem;color:var(--text3);}
+.timeline-course{font-size:0.8rem;color:var(--text2);margin-top:0.2rem;}
+
+/* ═══════════════════════════════════════════════
+   ACADEMIC EXPLORER
+═══════════════════════════════════════════════ */
+.year-tabs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:2rem;}
+.year-tab{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.5rem 1rem;border-radius:6px;border:1px solid var(--border2);
+  color:var(--text3);background:transparent;transition:all 0.2s;
+}
+.year-tab.active,.year-tab:hover{background:var(--red);color:#fff;border-color:var(--red);}
+.subjects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+.subject-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:1rem;transition:border-color 0.2s;
+}
+.subject-card:hover{border-color:var(--border2);}
+.subject-code{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;color:var(--red);margin-bottom:0.25rem;}
+.subject-name{font-size:0.85rem;font-weight:600;margin-bottom:0.5rem;line-height:1.4;}
+.subject-meta{display:flex;align-items:center;justify-content:space-between;margin-top:0.5rem;}
+.subject-units{font-size:0.72rem;color:var(--text3);}
+.status-badge{
+  font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.25rem 0.6rem;border-radius:100px;
+}
+.status-passed{background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3);}
+.status-taking{background:rgba(251,191,36,0.15);color:#F59E0B;border:1px solid rgba(251,191,36,0.3);}
+.status-none{background:var(--bg3);color:var(--text3);border:1px solid var(--border);}
+
+/* Academic progress */
+.academic-progress{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem;}
+.progress-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1rem 1.5rem;flex:1;min-width:140px;text-align:center;
+}
+.progress-year{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:0.5rem;}
+.progress-status{font-size:0.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:0.4rem;}
+.status-done{color:#22C55E;}
+.status-current{color:var(--red);}
+.status-rem{color:var(--text3);}
+
+/* ═══════════════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.skill-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.25rem;display:flex;align-items:center;gap:1rem;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.skill-card:hover{border-color:var(--red);transform:translateY(-2px);}
+.skill-icon{
+  width:42px;height:42px;border-radius:8px;
+  background:var(--red-dim);border:1px solid var(--red);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;font-weight:900;color:var(--red);flex-shrink:0;
+}
+.skill-name{font-size:0.9rem;font-weight:700;}
+.skill-type{font-size:0.7rem;color:var(--text3);}
+
+/* ═══════════════════════════════════════════════
+   PROJECTS
+═══════════════════════════════════════════════ */
+.projects-grid{display:grid;gap:2rem;}
+.project-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;transition:border-color 0.25s,box-shadow 0.25s;
+}
+.project-card:hover{border-color:var(--red);box-shadow:0 8px 32px var(--red-dim);}
+.project-header{padding:2rem;border-bottom:1px solid var(--border);}
+.project-num{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;color:var(--red);margin-bottom:0.5rem;}
+.project-title{font-size:1.5rem;font-weight:900;margin-bottom:0.25rem;}
+.project-sub{font-size:0.9rem;color:var(--text3);margin-bottom:1rem;}
+.project-course-tag{
+  display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;
+  padding:0.3rem 0.8rem;border-radius:100px;background:var(--red-dim);
+  color:var(--red);border:1px solid var(--red);margin-bottom:1rem;
+}
+.project-role-tag{
+  display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.08em;
+  padding:0.3rem 0.8rem;border-radius:100px;background:rgba(251,191,36,0.1);
+  color:#F59E0B;border:1px solid rgba(251,191,36,0.3);margin-bottom:1rem;margin-left:0.5rem;
+}
+.tech-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem;}
+.tech-tag{
+  font-size:0.68rem;font-weight:600;letter-spacing:0.05em;
+  padding:0.25rem 0.6rem;border-radius:4px;
+  border:1px solid var(--border2);color:var(--text3);
+  background:var(--bg3);
+}
+.project-body{padding:2rem;}
+.project-body h4{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:0.75rem;}
+.feature-list{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem;}
+.feature-item{
+  font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:4px;
+  background:var(--card2);border:1px solid var(--border);color:var(--text2);
+}
+.project-footer{
+  padding:1.5rem 2rem;border-top:1px solid var(--border);
+  display:flex;gap:1rem;flex-wrap:wrap;
+}
+.btn-sm{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+  padding:0.5rem 1.2rem;border-radius:6px;transition:all 0.2s;
+}
+.btn-sm.primary{background:var(--red);color:#fff;border:1px solid var(--red);}
+.btn-sm.primary:hover{background:transparent;color:var(--red);}
+.btn-sm.outline{border:1px solid var(--border2);color:var(--text3);}
+.btn-sm.outline:hover{border-color:var(--red);color:var(--red);}
+
+/* ═══════════════════════════════════════════════
+   INTERACTIVE DEMO
+═══════════════════════════════════════════════ */
+#demo-section{background:var(--bg2);border-radius:16px;padding:2rem;margin-top:3rem;}
+.demo-label{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;}
+.demo-flow{display:flex;align-items:stretch;gap:1rem;flex-wrap:wrap;}
+.demo-panel{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1rem;flex:1;min-width:180px;
+}
+.demo-panel h4{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:0.75rem;}
+.demo-product{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.5rem;border-radius:6px;border:1px solid var(--border);margin-bottom:0.4rem;
+  font-size:0.8rem;cursor:pointer;transition:border-color 0.2s,background 0.2s;
+}
+.demo-product:hover{border-color:var(--red);background:var(--red-dim);}
+.demo-product .price{color:var(--red);font-weight:700;font-size:0.75rem;}
+.demo-add{font-size:1rem;color:var(--red);}
+.demo-cart-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.8rem;
+}
+.demo-total{font-size:0.9rem;font-weight:700;margin-top:0.75rem;padding-top:0.75rem;border-top:2px solid var(--red);}
+.demo-arrow{font-size:1.5rem;color:var(--red);align-self:center;flex-shrink:0;}
+.demo-receipt{font-size:0.78rem;line-height:1.8;font-family:'Courier New',monospace;}
+.demo-receipt .r-line{border-top:1px dashed var(--border);margin:0.5rem 0;}
+.btn-checkout{
+  width:100%;margin-top:0.75rem;padding:0.6rem;
+  background:var(--red);color:#fff;border-radius:6px;
+  font-size:0.8rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+}
+.btn-checkout:hover{opacity:0.9;}
+
+/* ═══════════════════════════════════════════════
+   LEADERSHIP
+═══════════════════════════════════════════════ */
+.orgs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;}
+.org-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.25rem;transition:border-color 0.2s;
+}
+.org-card:hover{border-color:var(--red);}
+.org-role{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:0.25rem;}
+.org-name{font-size:0.95rem;font-weight:700;margin-bottom:0.25rem;}
+.org-period{font-size:0.78rem;color:var(--text3);}
+
+/* Events accordion */
+.events-list{display:flex;flex-direction:column;gap:0.5rem;}
+.event-item{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;transition:border-color 0.2s;
+}
+.event-item:hover{border-color:var(--border2);}
+.event-header{
+  padding:0.9rem 1.25rem;display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;font-size:0.88rem;font-weight:600;
+}
+.event-header .ev-icon{color:var(--red);transition:transform 0.2s;}
+.event-header.open .ev-icon{transform:rotate(180deg);}
+.event-body{
+  display:none;padding:0 1.25rem 1rem;font-size:0.82rem;color:var(--text3);line-height:1.6;
+}
+.event-body.open{display:block;}
+
+/* ═══════════════════════════════════════════════
+   ACHIEVEMENTS
+═══════════════════════════════════════════════ */
+.achievements-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;}
+.achievement-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.25rem;transition:border-color 0.2s,transform 0.2s;
+}
+.achievement-card:hover{border-color:var(--red);transform:translateY(-2px);}
+.ach-place{
+  font-size:1.4rem;font-weight:900;color:var(--red);margin-bottom:0.25rem;
+}
+.ach-title{font-size:0.88rem;font-weight:700;margin-bottom:0.25rem;}
+.ach-year{font-size:0.75rem;color:var(--text3);}
+.ach-badge{
+  display:inline-block;font-size:0.65rem;font-weight:700;letter-spacing:0.08em;
+  padding:0.2rem 0.5rem;border-radius:4px;margin-bottom:0.5rem;text-transform:uppercase;
+}
+.gold{background:rgba(251,191,36,0.15);color:#F59E0B;border:1px solid rgba(251,191,36,0.3);}
+.silver{background:rgba(148,163,184,0.15);color:#94A3B8;border:1px solid rgba(148,163,184,0.3);}
+.bronze{background:rgba(205,127,50,0.15);color:#CD7F32;border:1px solid rgba(205,127,50,0.3);}
+.champion{background:var(--red-dim);color:var(--red);border:1px solid var(--red);}
+.special{background:rgba(34,197,94,0.1);color:#22C55E;border:1px solid rgba(34,197,94,0.3);}
+
+/* ═══════════════════════════════════════════════
+   BEYOND CODE
+═══════════════════════════════════════════════ */
+.beyond-grid{display:flex;flex-wrap:wrap;gap:1rem;}
+.beyond-item{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1rem 1.5rem;display:flex;align-items:center;gap:0.75rem;
+  font-size:0.88rem;font-weight:600;transition:border-color 0.2s;
+}
+.beyond-item:hover{border-color:var(--red);}
+.beyond-icon{font-size:1.4rem;}
+
+/* ═══════════════════════════════════════════════
+   ROCKET LAB TEASER
+═══════════════════════════════════════════════ */
+#rocket-teaser{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:3rem;text-align:center;position:relative;overflow:hidden;
+}
+#rocket-teaser::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,var(--red-dim) 0%,transparent 70%);
+  pointer-events:none;
+}
+.rocket-float{
+  font-size:3rem;animation:rocketFloat 3s ease-in-out infinite;display:inline-block;margin-bottom:1rem;
+}
+@keyframes rocketFloat{0%,100%{transform:translateY(0) rotate(-10deg);}50%{transform:translateY(-15px) rotate(-10deg);}}
+.rocket-title{font-size:1.5rem;font-weight:900;letter-spacing:0.05em;margin-bottom:0.5rem;}
+.rocket-sub{font-size:0.85rem;color:var(--text3);margin-bottom:1.5rem;}
+
+/* Floating rocket icon */
+#rocket-fab{
+  position:fixed;bottom:2rem;right:2rem;z-index:990;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--red);color:#fff;font-size:1.4rem;
+  box-shadow:0 4px 20px var(--red-glow);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;
+  animation:rocketPulse 3s ease-in-out infinite;
+}
+#rocket-fab:hover{transform:scale(1.1);box-shadow:0 8px 30px var(--red-glow);}
+@keyframes rocketPulse{0%,100%{box-shadow:0 4px 20px var(--red-glow);}50%{box-shadow:0 4px 30px var(--red-glow),0 0 50px var(--red-dim);}}
+.fab-tooltip{
+  position:absolute;right:62px;top:50%;transform:translateY(-50%);
+  background:var(--card);border:1px solid var(--border);
+  font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.4rem 0.75rem;border-radius:6px;white-space:nowrap;color:var(--text);
+  opacity:0;pointer-events:none;transition:opacity 0.2s;
+}
+#rocket-fab:hover .fab-tooltip{opacity:1;}
+
+/* ═══════════════════════════════════════════════
+   ROCKET LAB GAME OVERLAY
+═══════════════════════════════════════════════ */
+#rocket-overlay{
+  position:fixed;inset:0;z-index:2000;
+  background:#000;display:none;flex-direction:column;align-items:center;justify-content:center;
+}
+#rocket-overlay.open{display:flex;}
+#game-canvas{border:1px solid #E02B38;max-width:100%;max-height:calc(100vh - 60px);}
+#game-hud{
+  position:absolute;top:0;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.75rem 1.5rem;
+  background:rgba(0,0,0,0.8);border-bottom:1px solid #E02B38;
+  font-family:'Courier New',monospace;font-size:0.8rem;color:#fff;
+}
+#game-hud .hud-item{display:flex;flex-direction:column;align-items:center;gap:0.1rem;}
+#game-hud .hud-label{font-size:0.6rem;color:#8E8E93;letter-spacing:0.1em;text-transform:uppercase;}
+#game-hud .hud-val{font-size:1rem;font-weight:700;color:#E02B38;}
+#game-exit-btn{
+  font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
+  color:#8E8E93;border:1px solid #3A3A3C;padding:0.3rem 0.75rem;border-radius:4px;
+  cursor:pointer;transition:color 0.2s,border-color 0.2s;background:transparent;
+}
+#game-exit-btn:hover{color:#E02B38;border-color:#E02B38;}
+#game-screen{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:rgba(0,0,0,0.92);
+  font-family:'Courier New',monospace;color:#fff;text-align:center;
+  z-index:10;
+}
+#game-screen.hidden{display:none;}
+.gs-title{font-size:2rem;font-weight:900;letter-spacing:0.1em;color:#E02B38;margin-bottom:0.5rem;}
+.gs-sub{font-size:0.85rem;color:#8E8E93;margin-bottom:2rem;letter-spacing:0.1em;}
+.gs-btn{
+  background:#E02B38;color:#fff;font-size:0.8rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;padding:0.75rem 2rem;border-radius:6px;
+  border:none;cursor:pointer;margin:0.3rem;transition:background 0.2s;font-family:'Courier New',monospace;
+}
+.gs-btn:hover{background:#C0202C;}
+.gs-btn.outline{background:transparent;color:#fff;border:1px solid #3A3A3C;}
+.gs-btn.outline:hover{border-color:#E02B38;color:#E02B38;}
+.gs-score{font-size:3rem;font-weight:900;color:#E02B38;margin:1rem 0;}
+#mobile-controls{
+  position:absolute;bottom:1rem;left:0;right:0;
+  display:none;justify-content:space-between;align-items:center;padding:0 1.5rem;
+}
+.mc-btn{
+  width:60px;height:60px;border-radius:50%;
+  background:rgba(224,43,56,0.2);border:2px solid #E02B38;
+  color:#fff;font-size:1.2rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;user-select:none;-webkit-user-select:none;
+  transition:background 0.15s;
+}
+.mc-btn:active{background:rgba(224,43,56,0.5);}
+.mc-center{display:flex;gap:0.5rem;}
+
+/* ═══════════════════════════════════════════════
+   ASK MY PORTFOLIO
+═══════════════════════════════════════════════ */
+#ask-section{background:var(--bg2);border-radius:16px;padding:2.5rem;}
+.ask-input-wrap{display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+#ask-input{
+  flex:1;min-width:200px;padding:0.75rem 1rem;
+  background:var(--card);border:1px solid var(--border2);border-radius:8px;
+  color:var(--text);font-size:0.9rem;font-family:inherit;
+  transition:border-color 0.2s;outline:none;
+}
+#ask-input:focus{border-color:var(--red);}
+#ask-btn{
+  background:var(--red);color:#fff;padding:0.75rem 1.5rem;
+  border-radius:8px;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;
+  text-transform:uppercase;transition:opacity 0.2s;
+}
+#ask-btn:hover{opacity:0.85;}
+.ask-suggestions{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;}
+.ask-suggestion{
+  font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:100px;
+  border:1px solid var(--border2);color:var(--text3);background:transparent;
+  cursor:pointer;transition:border-color 0.2s,color 0.2s;
+}
+.ask-suggestion:hover{border-color:var(--red);color:var(--red);}
+#ask-answer{
+  min-height:60px;padding:1rem;background:var(--card);
+  border:1px solid var(--border);border-radius:8px;
+  font-size:0.88rem;line-height:1.7;color:var(--text2);display:none;
+}
+#ask-answer.show{display:block;}
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+.contact-info-list{display:flex;flex-direction:column;gap:1rem;}
+.contact-info-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem;background:var(--card);border:1px solid var(--border);border-radius:8px;
+  transition:border-color 0.2s;
+}
+.contact-info-item:hover{border-color:var(--red);}
+.contact-icon{
+  width:40px;height:40px;border-radius:8px;
+  background:var(--red-dim);border:1px solid var(--red);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+}
+.contact-label{font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);}
+.contact-val{font-size:0.85rem;font-weight:600;color:var(--text);}
+.social-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.social-card{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1rem;display:flex;align-items:center;gap:0.75rem;
+  transition:border-color 0.2s,transform 0.2s;
+}
+.social-card:hover{border-color:var(--red);transform:translateY(-2px);}
+.social-icon{font-size:1.3rem;}
+.social-name{font-size:0.8rem;font-weight:700;}
+
+/* ═══════════════════════════════════════════════
+   DEV MODE EXTRAS
+═══════════════════════════════════════════════ */
+body.mode-dev .card,body.mode-dev .skill-card,body.mode-dev .project-card,
+body.mode-dev .org-card,body.mode-dev .achievement-card,body.mode-dev .subject-card{
+  border-radius:2px;border-color:#004D14;
+}
+body.mode-dev .section-label::before{content:'> ';}
+body.mode-dev .section-title::before{content:'// ';}
+body.mode-dev #navbar{border-bottom-color:#004D14;}
+body.mode-dev .btn-primary{background:#004D14;border-color:#00C832;border-radius:2px;}
+body.mode-dev .btn-primary:hover{background:transparent;color:#00C832;}
+body.mode-dev .tag.tech,.mode-dev .status-badge{border-radius:2px;}
+.dev-prompt{
+  display:none;font-size:0.8rem;color:#00C832;margin-bottom:1.5rem;
+  font-family:'Courier New',monospace;
+}
+body.mode-dev .dev-prompt{display:block;}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  border-top:1px solid var(--border);
+  padding:3rem 0 2rem;text-align:center;
+}
+.footer-logo{font-size:1.2rem;font-weight:900;letter-spacing:0.05em;margin-bottom:0.5rem;}
+.footer-sub{font-size:0.8rem;color:var(--text3);margin-bottom:0.5rem;}
+.footer-tagline{font-size:0.8rem;font-style:italic;color:var(--text3);margin-bottom:1.5rem;}
+.footer-socials{display:flex;justify-content:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.footer-social{
+  display:flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;
+  color:var(--text3);transition:color 0.2s;padding:0.4rem 0.8rem;
+  border-radius:6px;border:1px solid transparent;
+}
+.footer-social:hover{color:var(--red);border-color:var(--red);background:var(--red-dim);}
+.footer-status{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-size:0.65rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:#22C55E;border:1px solid rgba(34,197,94,0.3);border-radius:100px;
+  padding:0.3rem 0.8rem;background:rgba(34,197,94,0.05);
+}
+.footer-status::before{content:'●';font-size:0.5rem;animation:blink 1.5s infinite;}
+.footer-copy{font-size:0.72rem;color:var(--text3);margin-top:1rem;}
+
+/* ═══════════════════════════════════════════════
+   MODAL
+═══════════════════════════════════════════════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,0.75);
+  display:none;align-items:center;justify-content:center;padding:1rem;
+  backdrop-filter:blur(4px);
+}
+.modal-overlay.open{display:flex;}
+.modal-box{
+  background:var(--bg);border:1px solid var(--border);border-radius:16px;
+  max-width:700px;width:100%;max-height:85vh;overflow-y:auto;
+  position:relative;
+}
+.modal-header{
+  padding:1.5rem 2rem;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;background:var(--bg);z-index:1;
+}
+.modal-close{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  color:var(--text3);transition:border-color 0.2s,color 0.2s;
+}
+.modal-close:hover{border-color:var(--red);color:var(--red);}
+.modal-body{padding:2rem;}
+.modal-section{margin-bottom:2rem;}
+.modal-section:last-child{margin-bottom:0;}
+.modal-section h4{
+  font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);
+}
+.modal-section p,.modal-section li{font-size:0.85rem;color:var(--text2);line-height:1.7;}
+.modal-section ul{padding-left:1.25rem;list-style:disc;}
+.modal-section ul li{margin-bottom:0.25rem;}
+
+/* ═══════════════════════════════════════════════
+   CREATIVE MODE EXTRAS
+═══════════════════════════════════════════════ */
+body.mode-creative .card{border-color:#3D2E6A;}
+body.mode-creative .card:hover{border-color:#6E4FBE;box-shadow:0 8px 32px rgba(110,79,190,0.2);}
+body.mode-creative .section-label{color:#B57BFF;}
+body.mode-creative .btn-primary{background:linear-gradient(135deg,#6E4FBE,#B57BFF);border:none;}
+body.mode-creative .hero-badge{color:#B57BFF;border-color:#B57BFF;background:rgba(181,123,255,0.1);}
+body.mode-creative .timeline::before{background:linear-gradient(to bottom,#B57BFF,transparent);}
+body.mode-creative .timeline-dot{border-color:#B57BFF;}
+body.mode-creative .timeline-dot.active{background:#B57BFF;}
+body.mode-creative #hero .hero-tagline{border-color:#B57BFF;}
+body.mode-creative .hero-badge::before,.body.mode-creative .footer-status::before{animation:blink 1s infinite;}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  .nav-links,.nav-right{display:none;}
+  .hamburger{display:flex;}
+  .about-main{grid-template-columns:1fr;}
+  .demo-flow{flex-direction:column;}
+}
+@media(max-width:600px){
+  section{padding:4rem 0;}
+  .section-title{font-size:1.7rem;}
+  .hero-name{font-size:2rem;}
+  .project-header,.project-body,.project-footer{padding:1.25rem;}
+  .contact-grid{grid-template-columns:1fr;}
+  .social-grid{grid-template-columns:1fr;}
+  #mobile-controls{display:flex;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;}
+}
+
+/* ═══════════════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════════════ */
+.section-divider{height:1px;background:var(--border);margin:0 2rem;}
+.number-label{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.2em;
+  color:var(--text3);margin-bottom:0.25rem;font-family:'Courier New',monospace;
+}
+
+/* ═══════════════════════════════════════════════
+   PARADIGM SECTION
+═══════════════════════════════════════════════ */
+.paradigm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;}
+.paradigm-item{
+  background:var(--card);border:1px solid var(--border);border-radius:8px;
+  padding:1.25rem;text-align:center;transition:border-color 0.2s,transform 0.2s;
+}
+.paradigm-item:hover{border-color:var(--red);transform:translateY(-2px);}
+.paradigm-icon{font-size:1.8rem;margin-bottom:0.75rem;}
+.paradigm-name{font-size:0.85rem;font-weight:700;}
+
+/* ═══════════════════════════════════════════════
+   PROGRESS BAR FOR ACADEMIC JOURNEY
+═══════════════════════════════════════════════ */
+.journey-steps{display:flex;gap:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:0.5rem;}
+.journey-step{
+  flex:1;min-width:100px;text-align:center;position:relative;padding-top:2.5rem;
+}
+.journey-step::before{
+  content:'';position:absolute;top:1rem;left:50%;right:-50%;
+  height:2px;background:var(--border);transform:translateX(0);
+}
+.journey-step:last-child::before{display:none;}
+.journey-step-dot{
+  position:absolute;top:0.5rem;left:50%;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);
+  background:var(--bg);display:flex;align-items:center;justify-content:center;
+  font-size:0.6rem;
+}
+.journey-step-dot.done{background:var(--red);border-color:var(--red);color:#fff;}
+.journey-step-dot.current{border-color:var(--red);background:var(--red-dim);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--red-glow);}50%{box-shadow:0 0 0 6px transparent;}}
+.journey-step-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.25rem;}
+.journey-step-status{font-size:0.62rem;color:var(--text3);}
+</style>
+</head>
+<body class="mode-day" id="body">
+
+<!-- ═══ NAV ═══ -->
+<nav id="navbar" aria-label="Main navigation">
+  <div class="nav-logo">
+    <span class="dot">✦</span>
+    ANTHONIO'S DIGITAL LAB
+  </div>
+  <div class="nav-links">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#academics">Academics</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <button class="mode-btn active" onclick="setMode('day')" title="Day Lab">☀ Day</button>
+    <button class="mode-btn" onclick="setMode('night')" title="Night Lab">🌙 Night</button>
+    <button class="mode-btn" onclick="setMode('dev')" title="Dev Mode">&gt;_ Dev</button>
+    <button class="mode-btn" onclick="setMode('creative')" title="Creative Mode">✦ Creative</button>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" role="navigation">
+  <a href="#hero" onclick="closeMobileMenu()">Home</a>
+  <a href="#about" onclick="closeMobileMenu()">About</a>
+  <a href="#academics" onclick="closeMobileMenu()">Academics</a>
+  <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+  <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+  <a href="#leadership" onclick="closeMobileMenu()">Leadership</a>
+  <a href="#achievements" onclick="closeMobileMenu()">Achievements</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <div class="mobile-modes">
+    <button class="mode-btn" onclick="setMode('day');closeMobileMenu()">☀ Day</button>
+    <button class="mode-btn" onclick="setMode('night');closeMobileMenu()">🌙 Night</button>
+    <button class="mode-btn" onclick="setMode('dev');closeMobileMenu()">&gt;_ Dev</button>
+    <button class="mode-btn" onclick="setMode('creative');closeMobileMenu()">✦ Creative</button>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-circuit">
+    <span class="float-el font-mono" style="top:15%;left:5%;animation-delay:0s">CPE</span>
+    <span class="float-el font-mono" style="top:25%;right:8%;animation-delay:1s">01101</span>
+    <span class="float-el font-mono" style="top:70%;left:10%;animation-delay:2s">CIT-U</span>
+    <span class="float-el font-mono" style="top:60%;right:12%;animation-delay:0.5s">{ }</span>
+    <span class="float-el font-mono" style="top:80%;left:30%;animation-delay:1.5s">BSCpE</span>
+    <span class="float-el font-mono" style="top:35%;left:85%;animation-delay:2.5s">C#</span>
+    <span class="float-el font-mono" style="top:50%;left:3%;animation-delay:3s">SQL</span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge font-mono"><span></span>3rd Year Computer Engineering Student</div>
+    <h1 class="hero-name font-serif">
+      ANTHONY <span class="last">SONSONA</span><br>UMAPAS
+    </h1>
+    <p class="hero-title font-mono">Bachelor of Science in Computer Engineering</p>
+    <p class="hero-school font-sans">Cebu Institute of Technology – University</p>
+    <blockquote class="hero-tagline font-serif">
+      "It always seems impossible until it's done."
+    </blockquote>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary font-mono">✦ Explore My Work</a>
+      <a href="#about" class="btn-outline font-mono">About Me →</a>
+    </div>
+  </div>
+  <div class="hero-scroll font-mono" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">01 // ABOUT</p>
+      <p class="section-label">Who I Am</p>
+      <h2 class="section-title">The Engineer<br>Behind the Lab</h2>
+    </div>
+    <p class="dev-prompt">> cat about.txt</p>
+    <div class="about-main" style="margin-bottom:1.5rem;">
+      <div class="card">
+        <div class="about-avatar">AU</div>
+        <div class="card-label">About Me</div>
+        <h3 class="card-title">Anthony Sonsona Umapas</h3>
+        <p class="card-text">
+          A 3rd Year Bachelor of Science in Computer Engineering student at Cebu Institute of Technology – University.
+          Passionate about building technology solutions that are useful, well-designed, and impactful.
+          Experienced in leadership, event management, and collaborative work through organizations and academic projects.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-label">Future Goal</div>
+        <h3 class="card-title">Where I'm Headed</h3>
+        <p class="card-text">
+          To become a skilled and versatile technology professional who combines technical knowledge, creativity, and problem-solving to build useful real-world solutions.
+        </p>
+        <div style="margin-top:1rem;">
+          <div class="card-label" style="margin-bottom:0.5rem;">Documented Strengths</div>
+          <div class="interest-tags">
+            <span class="tag">Leadership</span>
+            <span class="tag">Communication</span>
+            <span class="tag">Teamwork</span>
+            <span class="tag">Problem-Solving</span>
+            <span class="tag">Organization</span>
+            <span class="tag">Adaptability</span>
+            <span class="tag">Creative Thinking</span>
+          </div>
+        </div>
       </div>
     </div>
-    <figure class="hero-photo">
-      <img src="profile.jpg" alt="Portrait of Anthony Sonsona Umapas">
-      <figcaption>Secretary &middot; ICpEP.SE CIT-U Chapter</figcaption>
-    </figure>
-  </header>
+    <div class="about-grid">
+      <div class="card">
+        <div class="card-label">Technology Interests</div>
+        <h3 class="card-title">What I'm Passionate About</h3>
+        <div class="interest-tags" style="margin-top:0.75rem;">
+          <span class="tag tech">Software Development</span>
+          <span class="tag tech">Web / App Development</span>
+          <span class="tag tech">UI / UX</span>
+          <span class="tag tech">Databases</span>
+          <span class="tag tech">Cloud Computing</span>
+          <span class="tag tech">Networking</span>
+          <span class="tag tech">System Development</span>
+          <span class="tag tech">Emerging Technologies</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Currently Learning</div>
+        <h3 class="card-title">In The Lab Right Now</h3>
+        <p class="card-text">
+          Feedback &amp; Control Systems · Logic Circuits &amp; Design · Software Design ·
+          Computer Engineering Drafting and Design · Software Development 1 (Track Course) ·
+          CPE Comprehensive Evaluation Course 1
+        </p>
+        <div class="card-label" style="margin-top:1rem;">Currently Building</div>
+        <p class="card-text">Details to be added.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <main>
+<!-- ═══ ACADEMICS ═══ -->
+<section id="academics">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">04 // ACADEMICS</p>
+      <p class="section-label">Academic Journey</p>
+      <h2 class="section-title">My Engineering<br>Curriculum</h2>
+      <p class="section-sub">A complete record of my educational history and academic progress.</p>
+    </div>
+    <p class="dev-prompt">> ls academics/</p>
 
-    <section id="about" class="panel">
-      <p class="eyebrow">Personal Overview</p>
-      <h2>About Anthony</h2>
-      <p>
-        I'm a Computer Engineering student based in Cebu, Philippines, currently serving as
-        Secretary of the ICpEP.SE CIT-U Chapter. My coursework spans embedded systems, software
-        architecture, and computer networks, and I focus on mastering the dual literacy of modern
-        computing &mdash; from bare-metal hardware timing constraints to maintainable, high-performance
-        software pipelines.
-      </p>
-    </section>
+    <!-- Education Timeline -->
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:3rem;margin-bottom:4rem;" class="edu-layout">
+      <div>
+        <div class="card-label" style="margin-bottom:1.5rem;">Educational History</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2009 – 2011</div>
+            <div class="timeline-school">Camp Lapu-lapu Elementary School</div>
+            <div class="timeline-level">Pre-School</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2011 – 2017</div>
+            <div class="timeline-school">Camp Lapu-lapu Elementary School</div>
+            <div class="timeline-level">Elementary</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2017 – 2021</div>
+            <div class="timeline-school">Apas National High School</div>
+            <div class="timeline-level">Junior High School</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-year">2021 – 2023</div>
+            <div class="timeline-school">University of Cebu – Banilad</div>
+            <div class="timeline-level">Senior High School</div>
+            <div class="timeline-course">STEM Strand</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-year">2023 – Present</div>
+            <div class="timeline-school">Cebu Institute of Technology – University</div>
+            <div class="timeline-level">College</div>
+            <div class="timeline-course">BS Computer Engineering · Curriculum 2018–2019</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-label" style="margin-bottom:1.5rem;">Academic Progress</div>
+        <div class="academic-progress">
+          <div class="progress-card">
+            <div class="progress-year">1st Year</div>
+            <div class="progress-status status-done">✓ Completed</div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-year">2nd Year</div>
+            <div class="progress-status status-done">✓ Completed</div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-year">Summer</div>
+            <div class="progress-status status-done">✓ Completed</div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-year">3rd Year</div>
+            <div class="progress-status status-current">● In Progress</div>
+          </div>
+          <div class="progress-card">
+            <div class="progress-year">4th Year</div>
+            <div class="progress-status status-rem">○ Remaining</div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:1rem;">
+          <div class="card-label">Student Information</div>
+          <table style="width:100%;font-size:0.82rem;border-collapse:collapse;margin-top:0.5rem;">
+            <tr><td style="color:var(--text3);padding:0.35rem 0;width:40%;">Course</td><td style="font-weight:600;">BS Computer Engineering</td></tr>
+            <tr><td style="color:var(--text3);padding:0.35rem 0;">Institution</td><td style="font-weight:600;">CIT – University</td></tr>
+            <tr><td style="color:var(--text3);padding:0.35rem 0;">Year Level</td><td style="font-weight:600;color:var(--red);">3rd Year (Current)</td></tr>
+            <tr><td style="color:var(--text3);padding:0.35rem 0;">Curriculum</td><td style="font-weight:600;">2018–2019</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
 
-    <section id="skills" class="panel">
-      <p class="eyebrow">Stack Inventory</p>
-      <h2>Skills &amp; Interests</h2>
-      <ul class="skills-grid">
-        <li><span class="tag">Bare Metal</span>C / C++ &amp; x86/ARM Assembly</li>
-        <li><span class="tag">Bare Metal</span>Linux Shell &amp; POSIX APIs</li>
-        <li><span class="tag">Platforms</span>TypeScript / Node.js &amp; C# (.NET)</li>
-        <li><span class="tag">Platforms</span>PostgreSQL &amp; Supabase RLS</li>
-        <li><span class="tag">Hardware</span>UART, SPI &amp; I2C Protocols</li>
-        <li><span class="tag">Personal</span>Coffee Shop Culture &amp; Local Discovery Apps</li>
-      </ul>
-    </section>
+    <!-- Subject Explorer -->
+    <div class="card-label" style="margin-bottom:1rem;">Subject Explorer</div>
+    <div class="year-tabs" role="tablist">
+      <button class="year-tab active" onclick="showYear('y1')" role="tab">1st Year</button>
+      <button class="year-tab" onclick="showYear('y2')" role="tab">2nd Year</button>
+      <button class="year-tab" onclick="showYear('summer')" role="tab">Summer</button>
+      <button class="year-tab" onclick="showYear('y3')" role="tab">3rd Year</button>
+      <button class="year-tab" onclick="showYear('y4')" role="tab">4th Year</button>
+    </div>
+    <div id="subjects-container"></div>
+  </div>
+</section>
 
-  </main>
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">05 // SKILLS</p>
+      <p class="section-label">Technical Skills</p>
+      <h2 class="section-title">Tools &amp; Technologies</h2>
+      <p class="section-sub">Skills documented through academic projects and coursework. No fabricated proficiency levels.</p>
+    </div>
+    <p class="dev-prompt">> skills --list</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">C</div>
+        <div><div class="skill-name">C</div><div class="skill-type">Programming Language</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">C++</div>
+        <div><div class="skill-name">C++</div><div class="skill-type">Programming Language</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">C#</div>
+        <div><div class="skill-name">C#</div><div class="skill-type">Via OOP Project</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">UI</div>
+        <div><div class="skill-name">UI / UX Design</div><div class="skill-type">Interface Design</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">DB</div>
+        <div><div class="skill-name">Databases</div><div class="skill-type">MS Access · OleDb</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">☁</div>
+        <div><div class="skill-name">Cloud Computing</div><div class="skill-type">Interest Area</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div><div class="skill-name">Networking</div><div class="skill-type">Interest Area</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">WF</div>
+        <div><div class="skill-name">Windows Forms</div><div class="skill-type">Via OOP Project</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">QA</div>
+        <div><div class="skill-name">Software Testing</div><div class="skill-type">Via QuestKarte</div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚙</div>
+        <div><div class="skill-name">System Analysis</div><div class="skill-type">Via CPE340</div></div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;padding:1rem;background:var(--card2);border:1px solid var(--border);border-radius:8px;">
+      <p style="font-size:0.8rem;color:var(--text3);"><strong style="color:var(--red);">Note:</strong> Technologies listed reflect documented project experience and coursework only. No fabricated skill levels or percentages.</p>
+    </div>
+  </div>
+</section>
 
-  <footer id="contact" class="contact">
-    <h2>Direct Transmission</h2>
-    <p>Open for engineering internships, collaborative research, or systems consultation.</p>
-    <nav class="socials">
-      <a href="https://github.com/apolloanthonio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">GitHub</a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">LinkedIn</a>
-      <a href="mailto:anthonyumapas890@gmail.com" class="btn btn-outline">Email</a>
-    </nav>
-    <p class="contact-detail">Banilad, Cebu City, Philippines 6000 &middot; +63 927 538 4107</p>
-    <p class="fine-print">&copy; 2026 Anthony Sonsona Umapas. All rights reserved.</p>
-  </footer>
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">03 // PROJECTS</p>
+      <p class="section-label">Project Showcase</p>
+      <h2 class="section-title">Things I've Built<br>&amp; Contributed To</h2>
+    </div>
+    <p class="dev-prompt">> ls projects/</p>
 
+    <!-- P1: Wildcats Lounge OOP1 -->
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">PROJECT 01</div>
+          <h3 class="project-title">WILDCATS LOUNGE</h3>
+          <p class="project-sub">POS and Staff Management System</p>
+          <span class="project-course-tag">OOP 1 Project</span>
+          <p style="font-size:0.82rem;color:var(--text3);margin-bottom:0.75rem;">Course: Object-Oriented Programming 1 for CPE</p>
+          <div class="tech-stack">
+            <span class="tech-tag">C#</span>
+            <span class="tech-tag">Windows Forms</span>
+            <span class="tech-tag">Visual Studio 2022</span>
+            <span class="tech-tag">Microsoft Access (.mdb)</span>
+            <span class="tech-tag">OleDb</span>
+            <span class="tech-tag">QRCoder</span>
+            <span class="tech-tag">SHA-256</span>
+            <span class="tech-tag">PrintDocument</span>
+            <span class="tech-tag">PrintPreviewDialog</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h4>Key Features</h4>
+          <div class="feature-list">
+            <span class="feature-item">POS Operations</span>
+            <span class="feature-item">Product Management</span>
+            <span class="feature-item">Sales Tracking</span>
+            <span class="feature-item">Staff Management</span>
+            <span class="feature-item">Time-in / Time-out</span>
+            <span class="feature-item">Attendance</span>
+            <span class="feature-item">Allowance Computation</span>
+            <span class="feature-item">Inventory Reporting</span>
+            <span class="feature-item">Receipt Generation</span>
+            <span class="feature-item">QR / eCash Support</span>
+            <span class="feature-item">Reports</span>
+            <span class="feature-item">Account Management</span>
+            <span class="feature-item">Role-Based Access</span>
+          </div>
+          <h4>Roles in System</h4>
+          <div class="interest-tags">
+            <span class="tag">Manager</span>
+            <span class="tag">Cashier</span>
+            <span class="tag">Barista</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <button class="btn-sm primary" onclick="openModal('modal-wc1')">View Dossier →</button>
+          <button class="btn-sm outline" onclick="openModal('modal-demo')">🎮 Interactive Demo</button>
+        </div>
+      </div>
+
+      <!-- P2: Wildcats Lounge OOP2 -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">PROJECT 02</div>
+          <h3 class="project-title">WILDCATS LOUNGE</h3>
+          <p class="project-sub">POS and Staff Management System</p>
+          <span class="project-course-tag">OOP 2 Project</span>
+          <p style="font-size:0.82rem;color:var(--text3);margin-bottom:0.75rem;">Course: Object-Oriented Programming 2 for CPE</p>
+          <p style="font-size:0.82rem;color:var(--text3);font-style:italic;">Note: This is a separate and distinct project from the OOP 1 Wildcats Lounge.</p>
+        </div>
+        <div class="project-body">
+          <div style="padding:1rem;background:var(--card2);border:1px solid var(--border);border-radius:8px;">
+            <p style="font-size:0.82rem;color:var(--text3);">Additional project details to be added. This project is documented as a separate implementation from the OOP 1 version.</p>
+          </div>
+        </div>
+        <div class="project-footer">
+          <button class="btn-sm primary" onclick="openModal('modal-wc2')">View Dossier →</button>
+        </div>
+      </div>
+
+      <!-- P3: QuestKarte -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">PROJECT 03</div>
+          <h3 class="project-title">QUESTKARTE</h3>
+          <p class="project-sub">Community-Driven Task and Service Marketplace Platform</p>
+          <span class="project-course-tag">CPE340 Project</span>
+          <span class="project-role-tag">Role: Software Tester</span>
+          <p style="font-size:0.82rem;color:var(--text3);margin-bottom:0.75rem;">Course: Modern Systems Analysis and Design</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Vite</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Leaflet</span>
+            <span class="tech-tag">React-Leaflet</span>
+            <span class="tech-tag">Oxlint</span>
+            <span class="tech-tag">Vercel</span>
+          </div>
+        </div>
+        <div class="project-body">
+          <h4>My Documented Responsibilities</h4>
+          <div class="feature-list">
+            <span class="feature-item">Quality Assurance</span>
+            <span class="feature-item">End-to-End Test Suite</span>
+            <span class="feature-item">Bug Tracking</span>
+            <span class="feature-item">Release Validation</span>
+            <span class="feature-item">Identity Verification Pipeline</span>
+            <span class="feature-item">Approval Pipeline Contribution</span>
+          </div>
+          <h4>Testing Results</h4>
+          <div style="padding:0.75rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:6px;font-size:0.82rem;">
+            ✅ 18 functional test cases executed · All 18 passed
+            <br>Strict TypeScript checking · Production build validation · Database constraint &amp; RLS testing
+          </div>
+        </div>
+        <div class="project-footer">
+          <button class="btn-sm primary" onclick="openModal('modal-qk')">View Dossier →</button>
+        </div>
+      </div>
+
+      <!-- P4: Kapehan -->
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-num">PROJECT 04</div>
+          <h3 class="project-title">KAPEHAN</h3>
+          <p class="project-sub">Your Guide to Better Coffee Spots</p>
+          <span class="project-course-tag" style="background:rgba(165,110,73,0.1);color:#A56E49;border-color:rgba(165,110,73,0.4);">Concept Project</span>
+          <p style="font-size:0.82rem;color:var(--text3);font-style:italic;margin-top:0.5rem;">Additional details to be added.</p>
+        </div>
+        <div class="project-body">
+          <h4>Concept Features</h4>
+          <div class="feature-list">
+            <span class="feature-item">Nearby Coffee-Shop Discovery</span>
+            <span class="feature-item">Interactive Map</span>
+            <span class="feature-item">Coffee-Shop Pages</span>
+            <span class="feature-item">Public Ratings</span>
+            <span class="feature-item">Public Reviews</span>
+            <span class="feature-item">Social Feed</span>
+            <span class="feature-item">Thoughts &amp; Photos</span>
+            <span class="feature-item">Videos</span>
+            <span class="feature-item">Community Content</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <button class="btn-sm primary" onclick="openModal('modal-kp')">View Concept →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Demo -->
+    <div id="demo-section">
+      <div class="demo-label">🎮 Interactive Demo — Wildcats Lounge POS (Portfolio UI Demonstration Only)</div>
+      <p style="font-size:0.8rem;color:var(--text3);margin-bottom:1.5rem;">This is a mock demonstration of the POS workflow. Data is fictional and for portfolio purposes only.</p>
+      <div class="demo-flow">
+        <div class="demo-panel" id="demo-products">
+          <h4>📦 Products</h4>
+          <div class="demo-product" onclick="addToCart('Americano','₱75')">
+            <span>Americano</span><span><span class="price">₱75</span> <span class="demo-add">+</span></span>
+          </div>
+          <div class="demo-product" onclick="addToCart('Cappuccino','₱90')">
+            <span>Cappuccino</span><span><span class="price">₱90</span> <span class="demo-add">+</span></span>
+          </div>
+          <div class="demo-product" onclick="addToCart('Matcha Latte','₱110')">
+            <span>Matcha Latte</span><span><span class="price">₱110</span> <span class="demo-add">+</span></span>
+          </div>
+          <div class="demo-product" onclick="addToCart('Caramel Macchiato','₱120')">
+            <span>Caramel Macchiato</span><span><span class="price">₱120</span> <span class="demo-add">+</span></span>
+          </div>
+          <div class="demo-product" onclick="addToCart('Hot Chocolate','₱85')">
+            <span>Hot Chocolate</span><span><span class="price">₱85</span> <span class="demo-add">+</span></span>
+          </div>
+        </div>
+        <div class="demo-arrow">→</div>
+        <div class="demo-panel" id="demo-cart-panel">
+          <h4>🛒 Cart</h4>
+          <div id="demo-cart-items"><p style="font-size:0.78rem;color:var(--text3);">Cart is empty.</p></div>
+          <div class="demo-total" id="demo-total" style="display:none;">Total: <span id="demo-total-val">₱0</span></div>
+          <button class="btn-checkout" id="demo-checkout-btn" style="display:none;" onclick="doCheckout()">Checkout →</button>
+          <button class="btn-sm outline" id="demo-clear-btn" style="display:none;width:100%;margin-top:0.5rem;" onclick="clearCart()">Clear Cart</button>
+        </div>
+        <div class="demo-arrow">→</div>
+        <div class="demo-panel" id="demo-receipt-panel">
+          <h4>🧾 Receipt</h4>
+          <div id="demo-receipt" class="demo-receipt">
+            <p style="font-size:0.78rem;color:var(--text3);">Receipt will appear here after checkout.</p>
+          </div>
+          <button class="btn-sm primary" id="demo-new-btn" style="display:none;width:100%;margin-top:0.75rem;" onclick="newTransaction()">New Transaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ LEADERSHIP ═══ -->
+<section id="leadership">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">07 // LEADERSHIP</p>
+      <p class="section-label">Organizations &amp; Leadership</p>
+      <h2 class="section-title">Beyond the Classroom</h2>
+    </div>
+    <p class="dev-prompt">> cat leadership.log</p>
+    <div class="orgs-grid">
+      <div class="org-card">
+        <div class="org-role">President</div>
+        <div class="org-name">SHS UC-CARES</div>
+        <div class="org-period">2022 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member</div>
+        <div class="org-name">UC-CARES</div>
+        <div class="org-period">2021 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Class President (4 Years)</div>
+        <div class="org-name">Apas National High School</div>
+        <div class="org-period">Multiple Terms</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Grade 8 Representative</div>
+        <div class="org-name">Supreme Student Government</div>
+        <div class="org-period">2018 – 2019</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">President (2 Years)</div>
+        <div class="org-name">Technology and Livelihood Education</div>
+        <div class="org-period">Multiple Terms</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Class President</div>
+        <div class="org-name">TLE Cookery</div>
+        <div class="org-period">Details to be added.</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Class Vice-Mayor</div>
+        <div class="org-name">University of Cebu – Banilad</div>
+        <div class="org-period">2022 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Secretary</div>
+        <div class="org-name">Apas National High School SSG</div>
+        <div class="org-period">2019 – 2020</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member</div>
+        <div class="org-name">Rotaract Club of Metro Cebu – CIT-U Chapter</div>
+        <div class="org-period">2023 – 2024</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member — Disease Prevention and Treatment</div>
+        <div class="org-name">Rotaract Club of Metro Cebu – CIT-U Chapter</div>
+        <div class="org-period">2023 – Present</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member</div>
+        <div class="org-name">Interact Club of Metro Mandaue</div>
+        <div class="org-period">2021 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member — Membership Committee</div>
+        <div class="org-name">Interact Club of Metro Mandaue</div>
+        <div class="org-period">2021 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member — Commission on Extra-Curricular Activities</div>
+        <div class="org-name">CIT-U SSG</div>
+        <div class="org-period">2022 – 2023</div>
+      </div>
+      <div class="org-card">
+        <div class="org-role">Member</div>
+        <div class="org-name">UNITED for CIT University</div>
+        <div class="org-period">2023 – Present</div>
+      </div>
+    </div>
+
+    <!-- ICPEP.SE -->
+    <div class="card" style="margin-top:1.5rem;border-color:var(--red);">
+      <div class="card-label">ICPEP.SE — CIT-U Chapter</div>
+      <h3 class="card-title">Institute of Computer Engineers of the Philippines — Student Edition</h3>
+      <div class="interest-tags" style="margin-top:0.75rem;">
+        <span class="tag tech">SSG Representative of Computer Engineering</span>
+        <span class="tag tech">Secretary, Committee on Information Management</span>
+        <span class="tag tech">Project Coordinator</span>
+      </div>
+    </div>
+
+    <!-- Events Archive -->
+    <div style="margin-top:3rem;">
+      <div class="card-label" style="margin-bottom:1rem;">Events &amp; Project Coordination Archive</div>
+      <div class="events-list" id="events-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACHIEVEMENTS ═══ -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">— ACHIEVEMENTS</p>
+      <p class="section-label">Achievement Wall</p>
+      <h2 class="section-title">Real Milestones</h2>
+      <p class="section-sub">Documented real achievements. Completely separate from Rocket Lab game achievements.</p>
+    </div>
+    <p class="dev-prompt">> cat achievements.log</p>
+    <div class="achievements-grid">
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Poster Making</div>
+        <div class="ach-year">2018</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Salad Making</div>
+        <div class="ach-year">2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge">4th Place</div>
+        <div class="ach-title">Wikang Katutubo — Impersonating a Hero</div>
+        <div class="ach-year">2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Volleyball — Men</div>
+        <div class="ach-year">2016–2017</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Volleyball — Men</div>
+        <div class="ach-year">2017–2018</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge silver">2nd Place</div>
+        <div class="ach-title">Volleyball — Men</div>
+        <div class="ach-year">2018–2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Dance Palabas</div>
+        <div class="ach-year">2016–2017</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge silver">2nd Place</div>
+        <div class="ach-title">Dance Palabas</div>
+        <div class="ach-year">2017–2018</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge gold">1st Place</div>
+        <div class="ach-title">Dance Palabas</div>
+        <div class="ach-year">2018–2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge">4th Place</div>
+        <div class="ach-title">Slogan Contest</div>
+        <div class="ach-year">2017–2018</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge silver">2nd Place</div>
+        <div class="ach-title">Slogan Contest</div>
+        <div class="ach-year">2018–2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge silver">2nd Place</div>
+        <div class="ach-title">Nutrition Month — Rhymes and Jingles</div>
+        <div class="ach-year">2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge bronze">3rd Place</div>
+        <div class="ach-title">Nutrition Month — Slogan Competition</div>
+        <div class="ach-year">2019</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge champion">Champion</div>
+        <div class="ach-title">Speech Choir Competition</div>
+        <div class="ach-year">University of Cebu – Banilad</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge special">Special Award</div>
+        <div class="ach-title">Most Outstanding Glee Club Member</div>
+        <div class="ach-year">UC-B · 2022–2023</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge champion">Champion</div>
+        <div class="ach-title">Intramurals Choral Speaking</div>
+        <div class="ach-year">2022–2023</div>
+      </div>
+      <div class="achievement-card">
+        <div class="ach-badge special">Captain</div>
+        <div class="ach-title">Team Captain — Volleyball Men</div>
+        <div class="ach-year">2016–2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BEYOND CODE ═══ -->
+<section id="beyond" style="padding-top:2rem;">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">— BEYOND CODE</p>
+      <p class="section-label">Interests &amp; Activities</p>
+      <h2 class="section-title">More Than Engineering</h2>
+    </div>
+    <div class="beyond-grid">
+      <div class="beyond-item"><span class="beyond-icon">🏐</span>Volleyball</div>
+      <div class="beyond-item"><span class="beyond-icon">🎵</span>Singing &amp; Music</div>
+      <div class="beyond-item"><span class="beyond-icon">🎭</span>Performing Arts</div>
+      <div class="beyond-item"><span class="beyond-icon">🤝</span>Student Organizations</div>
+      <div class="beyond-item"><span class="beyond-icon">🌍</span>Community Activities</div>
+      <div class="beyond-item"><span class="beyond-icon">📋</span>Event Coordination</div>
+      <div class="beyond-item"><span class="beyond-icon">💻</span>Technology</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ROCKET LAB ═══ -->
+<section id="rocket-lab" style="padding-top:2rem;">
+  <div class="container">
+    <p class="number-label" style="margin-bottom:1rem;">06 // ARCADE</p>
+    <div id="rocket-teaser">
+      <div class="rocket-float" aria-hidden="true">🚀</div>
+      <div class="demo-label" style="margin-bottom:0.5rem;">ROCKET LAB — 01</div>
+      <h2 class="rocket-title">TAKE A BREAK?</h2>
+      <p class="rocket-sub">Ready for a quick mission? Survive the system.</p>
+      <p style="font-size:0.8rem;color:var(--text3);margin-bottom:1.5rem;">A portfolio Easter egg mini-game. Not part of the academic record.</p>
+      <button class="btn-primary" onclick="openRocketLab()">🚀 ENTER ROCKET LAB</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ASK MY PORTFOLIO ═══ -->
+<section id="ask" style="padding-top:2rem;">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">— EXPLORE</p>
+      <p class="section-label">Portfolio Search</p>
+      <h2 class="section-title">Ask My Portfolio</h2>
+      <p class="section-sub">Have a question about Anthony's work, academics, or experience? Ask below.</p>
+    </div>
+    <div id="ask-section">
+      <div class="ask-suggestions" id="ask-suggestions"></div>
+      <div class="ask-input-wrap">
+        <input type="text" id="ask-input" placeholder='e.g. "What projects has Anthony made?"' aria-label="Portfolio question"/>
+        <button id="ask-btn" onclick="askPortfolio()">Ask →</button>
+      </div>
+      <div id="ask-answer" role="region" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <p class="number-label">08 // CONTACT</p>
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Let's Connect.</h2>
+    </div>
+    <p class="dev-prompt">> ping anthonyumapas890@gmail.com</p>
+    <div class="contact-grid">
+      <div class="contact-info-list">
+        <a href="mailto:anthonyumapas890@gmail.com" class="contact-info-item">
+          <div class="contact-icon">✉</div>
+          <div><div class="contact-label">Email</div><div class="contact-val">anthonyumapas890@gmail.com</div></div>
+        </a>
+        <a href="tel:09275384107" class="contact-info-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="contact-label">Phone</div><div class="contact-val">09275384107</div></div>
+        </a>
+        <a href="https://github.com/apolloanthonio" target="_blank" rel="noopener" class="contact-info-item">
+          <div class="contact-icon">⌥</div>
+          <div><div class="contact-label">GitHub</div><div class="contact-val">apolloanthonio</div></div>
+        </a>
+        <a href="https://www.linkedin.com/in/anthony-sonsona-umapas-82486340a/" target="_blank" rel="noopener" class="contact-info-item">
+          <div class="contact-icon">in</div>
+          <div><div class="contact-label">LinkedIn</div><div class="contact-val">Anthony Sonsona Umapas</div></div>
+        </a>
+      </div>
+      <div>
+        <div class="card-label" style="margin-bottom:1rem;">Social Channels</div>
+        <div class="social-grid">
+          <a href="https://www.facebook.com/anthony.umapas.9" target="_blank" rel="noopener" class="social-card">
+            <span class="social-icon">📘</span>
+            <div><div class="social-name">Facebook</div><div style="font-size:0.72rem;color:var(--text3);">@anthony.umapas.9</div></div>
+          </a>
+          <a href="https://www.instagram.com/xo_anthonio/" target="_blank" rel="noopener" class="social-card">
+            <span class="social-icon">📷</span>
+            <div><div class="social-name">Instagram</div><div style="font-size:0.72rem;color:var(--text3);">@xo_anthonio</div></div>
+          </a>
+          <a href="https://github.com/apolloanthonio" target="_blank" rel="noopener" class="social-card">
+            <span class="social-icon">⌥</span>
+            <div><div class="social-name">GitHub</div><div style="font-size:0.72rem;color:var(--text3);">apolloanthonio</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/anthony-sonsona-umapas-82486340a/" target="_blank" rel="noopener" class="social-card">
+            <span class="social-icon">💼</span>
+            <div><div class="social-name">LinkedIn</div><div style="font-size:0.72rem;color:var(--text3);">Anthony Umapas</div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">✦ ANTHONIO'S DIGITAL LAB</div>
+    <div class="footer-sub">Anthony Sonsona Umapas · 3rd Year Computer Engineering Student · CIT-U</div>
+    <div class="footer-tagline">"It always seems impossible until it's done."</div>
+    <div class="footer-socials">
+      <a href="https://github.com/apolloanthonio" target="_blank" rel="noopener" class="footer-social">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/anthony-sonsona-umapas-82486340a/" target="_blank" rel="noopener" class="footer-social">in LinkedIn</a>
+      <a href="https://www.facebook.com/anthony.umapas.9" target="_blank" rel="noopener" class="footer-social">📘 Facebook</a>
+      <a href="https://www.instagram.com/xo_anthonio/" target="_blank" rel="noopener" class="footer-social">📷 Instagram</a>
+      <a href="mailto:anthonyumapas890@gmail.com" class="footer-social">✉ Email</a>
+    </div>
+    <div class="footer-status">SYSTEM STATUS: ONLINE</div>
+    <div class="footer-copy">© 2026 Anthony Sonsona Umapas · All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING ROCKET FAB ═══ -->
+<div id="rocket-fab" onclick="openRocketLab()" role="button" tabindex="0" aria-label="Enter Rocket Lab"
+  onkeydown="if(event.key==='Enter')openRocketLab()">
+  🚀
+  <div class="fab-tooltip">ROCKET LAB — 01</div>
+</div>
+
+<!-- ═══ ROCKET LAB OVERLAY ═══ -->
+<div id="rocket-overlay" role="dialog" aria-modal="true" aria-label="Rocket Lab Game">
+  <div id="game-hud">
+    <div class="hud-item"><div class="hud-label">Score</div><div class="hud-val" id="hud-score">0</div></div>
+    <div class="hud-item"><div class="hud-label">Hi-Score</div><div class="hud-val" id="hud-hi">0</div></div>
+    <div class="hud-item"><div class="hud-label">Level</div><div class="hud-val" id="hud-level">1</div></div>
+    <div class="hud-item"><div class="hud-label">Lives</div><div class="hud-val" id="hud-lives">♥♥♥</div></div>
+    <button id="game-exit-btn" onclick="closeRocketLab()">ESC / EXIT</button>
+  </div>
+  <canvas id="game-canvas" width="480" height="540" aria-label="Rocket Lab game canvas"></canvas>
+  <div id="mobile-controls">
+    <button class="mc-btn" id="mc-left" aria-label="Move left">◀</button>
+    <div class="mc-center">
+      <button class="mc-btn" id="mc-fire" aria-label="Fire" style="background:rgba(224,43,56,0.4);">🔥</button>
+    </div>
+    <button class="mc-btn" id="mc-right" aria-label="Move right">▶</button>
+  </div>
+  <!-- Start Screen -->
+  <div id="game-screen">
+    <div class="gs-title">ANTHONIO'S<br>ROCKET LAB</div>
+    <div class="gs-sub">MISSION: SURVIVE THE SYSTEM</div>
+    <div style="font-size:0.75rem;color:#8E8E93;margin-bottom:2rem;line-height:1.8;">
+      ← → / A D — Move &nbsp;|&nbsp; SPACE — Fire &nbsp;|&nbsp; ESC — Pause
+    </div>
+    <button class="gs-btn" onclick="startGame()">🚀 LAUNCH</button>
+    <button class="gs-btn outline" onclick="closeRocketLab()">← Back to Portfolio</button>
+    <div style="font-size:0.68rem;color:#3A3A3C;margin-top:2rem;">This is a fictional portfolio mini-game. Not part of the academic record.</div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- WC1 Modal -->
+<div class="modal-overlay" id="modal-wc1">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div style="font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);">OOP 1 PROJECT</div>
+      <div style="font-size:1.1rem;font-weight:800;">Wildcats Lounge</div></div>
+      <button class="modal-close" onclick="closeModal('modal-wc1')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h4>Overview</h4>
+        <p>A POS and Staff Management System developed for the Object-Oriented Programming 1 course. The system manages point-of-sale operations, staff scheduling, attendance, and allowance computation for a simulated café lounge environment.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Technologies Used</h4>
+        <div class="tech-stack">
+          <span class="tech-tag">C#</span><span class="tech-tag">Windows Forms</span>
+          <span class="tech-tag">Visual Studio 2022</span><span class="tech-tag">Microsoft Access (.mdb)</span>
+          <span class="tech-tag">OleDb</span><span class="tech-tag">QRCoder</span>
+          <span class="tech-tag">SHA-256</span><span class="tech-tag">PrintDocument</span>
+          <span class="tech-tag">PrintPreviewDialog</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h4>System Roles</h4>
+        <ul>
+          <li><strong>Manager</strong> — Full access; daily allowance: ₱100</li>
+          <li><strong>Cashier</strong> — POS operations; hourly allowance: ₱25/hr</li>
+          <li><strong>Barista</strong> — Order fulfillment; hourly allowance: ₱25/hr</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <h4>System Features</h4>
+        <ul>
+          <li>POS operations and product management</li>
+          <li>Sales tracking and reporting</li>
+          <li>Staff management with time-in/time-out</li>
+          <li>Attendance tracking and allowance computation</li>
+          <li>Inventory reporting and management</li>
+          <li>Receipt generation with PrintDocument/PrintPreviewDialog</li>
+          <li>QR / eCash payment support via QRCoder</li>
+          <li>Role-based account management</li>
+          <li>Password hashing with SHA-256</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <h4>Challenges</h4>
+        <ul>
+          <li>Role management implementation</li>
+          <li>Database CRUD operations with OleDb</li>
+          <li>UI design for multiple user types</li>
+          <li>Analytics and reporting logic</li>
+          <li>Inventory transaction management</li>
+          <li>Attendance and allowance automation</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <h4>Key Learnings</h4>
+        <ul>
+          <li>Database connectivity using OleDb</li>
+          <li>Password handling using SHA-256</li>
+          <li>UI design with Windows Forms</li>
+          <li>Error handling and input validation</li>
+          <li>File and image management</li>
+          <li>Sales and attendance automation</li>
+          <li>Allowance computation logic</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <h4>Future Improvements</h4>
+        <ul>
+          <li>Migration to SQL Server or SQLite</li>
+          <li>Barcode scanner integration</li>
+          <li>Loyalty and rewards system</li>
+          <li>PDF/Excel report export</li>
+          <li>Graphical analytics dashboard</li>
+          <li>Improved QR/e-wallet support</li>
+          <li>Query optimization and real-time inventory</li>
+          <li>Enhanced security and session management</li>
+          <li>Reusable helper classes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WC2 Modal -->
+<div class="modal-overlay" id="modal-wc2">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div style="font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);">OOP 2 PROJECT</div>
+      <div style="font-size:1.1rem;font-weight:800;">Wildcats Lounge</div></div>
+      <button class="modal-close" onclick="closeModal('modal-wc2')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h4>Overview</h4>
+        <p>A separate and distinct project from the OOP 1 Wildcats Lounge, developed for the Object-Oriented Programming 2 course. Additional project details to be added.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Technologies</h4>
+        <p>Details to be added.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Features</h4>
+        <p>Details to be added.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QuestKarte Modal -->
+<div class="modal-overlay" id="modal-qk">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div style="font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);">CPE340 PROJECT · SOFTWARE TESTER</div>
+      <div style="font-size:1.1rem;font-weight:800;">QuestKarte</div></div>
+      <button class="modal-close" onclick="closeModal('modal-qk')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h4>Overview</h4>
+        <p>A community-driven task and service marketplace platform developed as a group project for CPE340 — Modern Systems Analysis and Design. Anthony's documented role was <strong>Software Tester</strong>.</p>
+      </div>
+      <div class="modal-section">
+        <h4>My Role</h4>
+        <p><strong>Software Tester</strong> — Responsible for quality assurance, end-to-end test suite execution, bug tracking, and release validation. Also contributed to the student and professional identity verification gate and approval pipeline.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Technologies</h4>
+        <div class="tech-stack" style="margin-top:0;">
+          <span class="tech-tag">React</span><span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Vite</span><span class="tech-tag">Supabase</span>
+          <span class="tech-tag">PostgreSQL</span><span class="tech-tag">Leaflet</span>
+          <span class="tech-tag">React-Leaflet</span><span class="tech-tag">Oxlint</span>
+          <span class="tech-tag">Vercel</span>
+        </div>
+      </div>
+      <div class="modal-section">
+        <h4>Testing Results</h4>
+        <ul>
+          <li>18 functional test cases executed</li>
+          <li>All 18 test cases passed</li>
+          <li>Strict TypeScript checking validated</li>
+          <li>Production build validation completed</li>
+          <li>Database constraint and RLS testing performed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Kapehan Modal -->
+<div class="modal-overlay" id="modal-kp">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div><div style="font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:#A56E49;">CONCEPT PROJECT</div>
+      <div style="font-size:1.1rem;font-weight:800;">Kapehan</div></div>
+      <button class="modal-close" onclick="closeModal('modal-kp')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h4>Concept Overview</h4>
+        <p>Kapehan is a coffee-shop discovery and community platform concept. It helps users find nearby coffee shops, explore their profiles, and engage with community content through ratings, reviews, photos, and videos.</p>
+      </div>
+      <div class="modal-section">
+        <h4>Concept Features</h4>
+        <ul>
+          <li>Nearby coffee-shop discovery</li>
+          <li>Interactive map interface</li>
+          <li>Individual coffee-shop pages with ratings and reviews</li>
+          <li>Public thoughts, photos, and video sharing</li>
+          <li>Community social feed</li>
+          <li>Community-generated content per coffee shop</li>
+        </ul>
+      </div>
+      <div class="modal-section">
+        <h4>Additional Information</h4>
+        <p>Course, team members, technologies, deployment details, and completion status: Details to be added.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Demo Modal -->
+<div class="modal-overlay" id="modal-demo">
+  <div class="modal-box" style="max-width:900px;">
+    <div class="modal-header">
+      <div><div style="font-size:0.65rem;font-weight:700;letter-spacing:0.15em;color:var(--red);">INTERACTIVE DEMO</div>
+      <div style="font-size:1.1rem;font-weight:800;">Wildcats Lounge POS</div></div>
+      <button class="modal-close" onclick="closeModal('modal-demo')" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:0.8rem;color:var(--text3);margin-bottom:1rem;">Portfolio UI demonstration only. Uses fictional mock data. No real transactions.</p>
+      <div class="demo-flow">
+        <div class="demo-panel">
+          <h4>📦 Products</h4>
+          <div class="demo-product" onclick="addToCart2('Americano','₱75')"><span>Americano</span><span><span class="price">₱75</span> <span class="demo-add">+</span></span></div>
+          <div class="demo-product" onclick="addToCart2('Cappuccino','₱90')"><span>Cappuccino</span><span><span class="price">₱90</span> <span class="demo-add">+</span></span></div>
+          <div class="demo-product" onclick="addToCart2('Matcha Latte','₱110')"><span>Matcha Latte</span><span><span class="price">₱110</span> <span class="demo-add">+</span></span></div>
+          <div class="demo-product" onclick="addToCart2('Caramel Macchiato','₱120')"><span>Caramel Macchiato</span><span><span class="price">₱120</span> <span class="demo-add">+</span></span></div>
+          <div class="demo-product" onclick="addToCart2('Hot Choco','₱85')"><span>Hot Choco</span><span><span class="price">₱85</span> <span class="demo-add">+</span></span></div>
+        </div>
+        <div class="demo-arrow">→</div>
+        <div class="demo-panel">
+          <h4>🛒 Cart</h4>
+          <div id="demo-cart-items2"><p style="font-size:0.78rem;color:var(--text3);">Cart is empty.</p></div>
+          <div class="demo-total" id="demo-total2" style="display:none;">Total: <span id="demo-total-val2">₱0</span></div>
+          <button class="btn-checkout" id="demo-checkout-btn2" style="display:none;" onclick="doCheckout2()">Checkout →</button>
+          <button class="btn-sm outline" id="demo-clear-btn2" style="display:none;width:100%;margin-top:0.5rem;" onclick="clearCart2()">Clear Cart</button>
+        </div>
+        <div class="demo-arrow">→</div>
+        <div class="demo-panel">
+          <h4>🧾 Receipt</h4>
+          <div id="demo-receipt2" class="demo-receipt"><p style="font-size:0.78rem;color:var(--text3);">Receipt will appear here after checkout.</p></div>
+          <button class="btn-sm primary" id="demo-new-btn2" style="display:none;width:100%;margin-top:0.75rem;" onclick="newTransaction2()">New Transaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════ -->
+<script>
+// ─── MODE SYSTEM ───────────────────────────────
+function setMode(m){
+  const body=document.getElementById('body');
+  body.className='mode-'+m;
+  document.querySelectorAll('.mode-btn').forEach(b=>{b.classList.remove('active');});
+  document.querySelectorAll('.mode-btn').forEach(b=>{
+    if(b.textContent.toLowerCase().includes(m.slice(0,3))||
+      (m==='dev'&&b.textContent.includes('Dev'))||
+      (m==='day'&&b.textContent.includes('Day'))||
+      (m==='night'&&b.textContent.includes('Night'))||
+      (m==='creative'&&b.textContent.includes('Creative'))){
+      b.classList.add('active');
+    }
+  });
+  localStorage.setItem('adl-mode',m);
+}
+// Load saved mode
+(function(){const m=localStorage.getItem('adl-mode')||'day';setMode(m);})();
+
+// ─── HAMBURGER ─────────────────────────────────
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobile-menu');
+hamburger.addEventListener('click',()=>{
+  const open=mobileMenu.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded',open);
+});
+function closeMobileMenu(){mobileMenu.classList.remove('open');hamburger.setAttribute('aria-expanded',false);}
+
+// ─── ACTIVE NAV ────────────────────────────────
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  const sections=['hero','about','academics','skills','projects','leadership','achievements','contact'];
+  let cur='hero';
+  sections.forEach(id=>{
+    const s=document.getElementById(id);
+    if(s&&window.scrollY>=s.offsetTop-100)cur=id;
+  });
+  navLinks.forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+cur);
+  });
+});
+
+// ─── SUBJECTS DATA ─────────────────────────────
+const subjects={
+  y1:{label:'First Year',note:'All subjects: Passed',items:[
+    {code:'CPE131',name:'Computer Engineering as a Discipline',units:1.0,status:'passed'},
+    {code:'CPE132',name:'Discrete Mathematics',units:3.0,status:'passed'},
+    {code:'CPE161',name:'Programming Logic and Design 1',units:3.0,status:'passed'},
+    {code:'CPE162',name:'Programming Logic and Design 2',units:3.0,status:'passed'},
+    {code:'CHEM131',name:'Chemistry for Engineers (Lec)',units:3.0,status:'passed'},
+    {code:'CHEM181',name:'Chemistry for Engineers (Lab)',units:1.0,status:'passed'},
+    {code:'ENGL031',name:'Purposive Communication',units:3.0,status:'passed'},
+    {code:'MATH137',name:'Engineering Calculus 1',units:3.0,status:'passed'},
+    {code:'MATH138',name:'Engineering Calculus 2',units:3.0,status:'passed'},
+    {code:'MATH031',name:'Mathematics in the Modern World',units:3.0,status:'passed'},
+    {code:'NSTP111',name:'National Service Training Program 1',units:3.0,status:'passed'},
+    {code:'NSTP112',name:'National Service Training Program 2',units:3.0,status:'passed'},
+    {code:'PE103',name:'Movement Enhancement / PATHFIT 1',units:2.0,status:'passed'},
+    {code:'PE104',name:'Fitness Exercises / PATHFIT 2',units:2.0,status:'passed'},
+    {code:'PHYS132',name:'Physics for Engineers, Lec',units:3.0,status:'passed'},
+    {code:'PHYS182',name:'Physics for Engineers, Lab',units:1.0,status:'passed'},
+    {code:'PSYCH031',name:'Understanding the Self',units:3.0,status:'passed'},
+    {code:'SOCSCI032',name:'The Contemporary World',units:3.0,status:'passed'},
+    {code:'STS031',name:'Science, Technology and Society',units:3.0,status:'passed'},
+  ]},
+  y2:{label:'Second Year',note:'All subjects: Passed',items:[
+    {code:'CPE261',name:'Object Oriented Programming 1 for CPE',units:3.0,status:'passed'},
+    {code:'CPE232',name:'Numerical Methods',units:3.0,status:'passed'},
+    {code:'CPE234',name:'Advanced Engineering Mathematics for CPE',units:3.0,status:'passed'},
+    {code:'CPE262',name:'Object Oriented Programming 2 for CPE',units:2.0,status:'passed'},
+    {code:'CPE264',name:'Data Structures and Algorithm for CPE',units:4.0,status:'passed'},
+    {code:'EE231A',name:'Fundamentals of Electrical Circuits, Lec',units:3.0,status:'passed'},
+    {code:'EE281A',name:'Fundamentals of Electrical Circuits, Lab',units:1.0,status:'passed'},
+    {code:'ECE254',name:'Fundamentals of Electronic Circuits, Lec',units:3.0,status:'passed'},
+    {code:'ECE204',name:'Fundamentals of Electronic Circuits / Basic Electronics, Lab',units:1.0,status:'passed'},
+    {code:'ES031',name:'Engineering Data Analysis',units:3.0,status:'passed'},
+    {code:'ES083',name:'Computer Aided Design and Drafting',units:1.0,status:'passed'},
+    {code:'GE CPE1',name:'General Education Elective 1',units:3.0,status:'passed'},
+    {code:'GE CPE2',name:'General Education Elective 2',units:3.0,status:'passed'},
+    {code:'HUM031',name:'Art Appreciation',units:3.0,status:'passed'},
+    {code:'MATH237',name:'Differential Equations',units:3.0,status:'passed'},
+    {code:'PE205',name:'PATHFIT 3 Menu of Sports',units:2.0,status:'passed'},
+    {code:'PE206',name:'PATHFIT 4 Menu of Sports',units:2.0,status:'passed'},
+    {code:'PHILO031',name:'Ethics',units:3.0,status:'passed'},
+  ]},
+  summer:{label:'Summer',note:'All subjects: Passed',items:[
+    {code:'CPE330',name:'Operating Systems for CPE',units:3.0,status:'passed'},
+    {code:'CPE340',name:'Modern Systems Analysis and Design',units:3.0,status:'passed'},
+  ]},
+  y3:{label:'Third Year (Current)',note:'Anthony is currently a 3rd Year student.',items:[
+    {code:'CPE331',name:'Data and Digital Communications',units:3.0,status:'passed'},
+    {code:'CPE333',name:'Basic Occupational Safety and Health',units:3.0,status:'passed'},
+    {code:'CPE336',name:'CPE Laws and Professional Practice',units:2.0,status:'passed'},
+    {code:'ES038',name:'Technopreneurship',units:3.0,status:'passed'},
+    {code:'GE CPE3',name:'General Education Elective 3',units:3.0,status:'passed'},
+    {code:'CPE335',name:'Feedback and Control Systems',units:3.0,status:'taking'},
+    {code:'CPE361',name:'Logic Circuits and Design',units:4.0,status:'taking'},
+    {code:'CPE363',name:'Software Design',units:4.0,status:'taking'},
+    {code:'CPE381',name:'Computer Engineering Drafting and Design',units:1.0,status:'taking'},
+    {code:'CPEPE361',name:'Track Course 1: Software Development 1',units:3.0,status:'taking'},
+    {code:'CPECC481',name:'CPE Comprehensive Evaluation Course 1',units:1.0,status:'taking'},
+    {code:'CPE334',name:'Methods of Research',units:3.0,status:'none'},
+    {code:'CPE364',name:'Computer Networks and Security',units:4.0,status:'none'},
+    {code:'CPE366',name:'Microprocessors',units:4.0,status:'none'},
+    {code:'CPE368',name:'Fundamentals of Mixed Signals and Sensors',units:4.0,status:'none'},
+    {code:'CPE382',name:'Introduction to HDL',units:1.0,status:'none'},
+    {code:'CPEPE362',name:'Track Course 2',units:3.0,status:'none'},
+    {code:'CPE460',name:'On the Job Training (240 Hours)',units:6.0,status:'none'},
+  ]},
+  y4:{label:'Fourth Year (Remaining Curriculum)',note:'Anthony is currently a 3rd Year student. Fourth year subjects are curriculum items only.',items:[
+    {code:'CPE461',name:'Embedded Systems',units:4.0,status:'none'},
+    {code:'CPE432',name:'Emerging Technologies in CPE',units:3.0,status:'none'},
+    {code:'CPE463',name:'Computer Architecture and Organization',units:4.0,status:'none'},
+    {code:'CPE462',name:'CPE Practice and Design 2',units:4.0,status:'none'},
+    {code:'CPE465',name:'Digital Signal Processing',units:4.0,status:'none'},
+    {code:'CPE482',name:'Seminars and Field Trips',units:1.0,status:'none'},
+    {code:'CPE481',name:'CPE Practice and Design 1',units:2.0,status:'none'},
+    {code:'ES034',name:'Engineering Management',units:3.0,status:'passed'},
+    {code:'CPECC481',name:'CPE Comprehensive Evaluation Course 1',units:1.0,status:'taking'},
+    {code:'RIZAL031',name:'The Life and Works of Rizal',units:3.0,status:'passed'},
+    {code:'CPEPE463',name:'Track Course 3',units:3.0,status:'none'},
+    {code:'SOCSCI031',name:'Readings in Philippine History',units:3.0,status:'passed'},
+    {code:'ES032',name:'Engineering Economics',units:3.0,status:'passed'},
+  ]},
+};
+let currentYear='y1';
+function showYear(y){
+  currentYear=y;
+  document.querySelectorAll('.year-tab').forEach((b,i)=>{
+    const ks=Object.keys(subjects);
+    b.classList.toggle('active',ks[i]===y);
+  });
+  renderSubjects(y);
+}
+function statusBadge(s){
+  if(s==='passed')return '<span class="status-badge status-passed">Passed</span>';
+  if(s==='taking')return '<span class="status-badge status-taking">Currently Taking</span>';
+  return '<span class="status-badge status-none">No Status Provided</span>';
+}
+function renderSubjects(y){
+  const d=subjects[y];
+  const c=document.getElementById('subjects-container');
+  const note=d.note?`<p style="font-size:0.78rem;color:var(--text3);margin-bottom:1rem;padding:0.5rem 0.75rem;background:var(--card2);border-radius:6px;border-left:3px solid var(--red);">${d.note}</p>`:'';
+  c.innerHTML=note+'<div class="subjects-grid">'+d.items.map(s=>`
+    <div class="subject-card">
+      <div class="subject-code">${s.code}</div>
+      <div class="subject-name">${s.name}</div>
+      <div class="subject-meta">
+        <span class="subject-units">${s.units} ${s.units===1?'Unit':'Units'}</span>
+        ${statusBadge(s.status)}
+      </div>
+    </div>`).join('')+'</div>';
+}
+renderSubjects('y1');
+
+// ─── EVENTS DATA ───────────────────────────────
+const events=[
+  'Welcome Week 2024','Cosmic Blooms: Welcome to the Colorful Tek-Universe',
+  'Intramurals 2024–2025: The Clash of Celestial Realms',
+  'Celestial Voices: Sing Solo and Duet 2025','Community Bundles of Joy Donation',
+  'PAKIG-ABIABI: Wildcats, Welcome Home!','The Grand Return: Venturing into a World of Imagination',
+  'Pakighimamat 2023','Petnoy Teknofestival 2023','EcoVogue: A Showcase of Green',
+  'TeknoThreads Gear up for Style','SSG Booth 2023','Paskong Teknoy: BATTLE OF THE BANDS',
+  'Paskong Teknoy: Malipayon og Malambu-on','ICPEP.SE Acquaintance Party 2023',
+  'Queen of Teknonites 2023','Teknonites 2023: Winter Gala','Pasko sa Sugbo 2023',
+  'Pasko sa Kabatan-onan 2023','Return of the WildCats 2024','Tekno Merkado 2024',
+  'Petnoy: Teknofestival 2.0','PAKIGHIMAMAT 2.0: Teknoy ConnectFest',
+  'HIV/AIDS Seminar for Awareness Day','Intramurals 2024','Mr. and Ms. Intramurals 2024',
+  'Dance Sport','Dance Palabas','Bench Yelling',
+];
+(function(){
+  const el=document.getElementById('events-list');
+  el.innerHTML=events.map((ev,i)=>`
+    <div class="event-item">
+      <div class="event-header" onclick="toggleEvent(this)" role="button" aria-expanded="false">
+        <span>${ev}</span><span class="ev-icon">▾</span>
+      </div>
+      <div class="event-body">Event coordination and participation. Additional details to be added.</div>
+    </div>`).join('');
+})();
+function toggleEvent(header){
+  header.classList.toggle('open');
+  header.setAttribute('aria-expanded',header.classList.contains('open'));
+  const body=header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+// ─── POS DEMO (inline) ─────────────────────────
+let cart=[];
+function addToCart(name,priceStr){
+  const price=parseInt(priceStr.replace('₱',''));
+  const existing=cart.find(i=>i.name===name);
+  if(existing)existing.qty++;
+  else cart.push({name,price,qty:1});
+  renderCart();
+}
+function renderCart(){
+  const ci=document.getElementById('demo-cart-items');
+  const tot=document.getElementById('demo-total');
+  const totVal=document.getElementById('demo-total-val');
+  const chk=document.getElementById('demo-checkout-btn');
+  const clr=document.getElementById('demo-clear-btn');
+  if(!cart.length){
+    ci.innerHTML='<p style="font-size:0.78rem;color:var(--text3);">Cart is empty.</p>';
+    tot.style.display='none';chk.style.display='none';clr.style.display='none';return;
+  }
+  ci.innerHTML=cart.map(i=>`<div class="demo-cart-item"><span>${i.name} x${i.qty}</span><span style="color:var(--red);font-weight:700;">₱${i.price*i.qty}</span></div>`).join('');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  totVal.textContent='₱'+total;
+  tot.style.display='';chk.style.display='';clr.style.display='';
+}
+function clearCart(){cart=[];renderCart();}
+function doCheckout(){
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const r=document.getElementById('demo-receipt');
+  const nb=document.getElementById('demo-new-btn');
+  const now=new Date();
+  const ts=now.toLocaleString('en-PH');
+  r.innerHTML=`<div><strong>WILDCATS LOUNGE</strong></div>
+<div>Demo Receipt</div>
+<div class="r-line"></div>
+${cart.map(i=>`<div style="display:flex;justify-content:space-between;"><span>${i.name} x${i.qty}</span><span>₱${i.price*i.qty}</span></div>`).join('')}
+<div class="r-line"></div>
+<div style="display:flex;justify-content:space-between;font-weight:700;"><span>TOTAL</span><span>₱${total}</span></div>
+<div class="r-line"></div>
+<div style="font-size:0.68rem;color:var(--text3);">${ts}</div>
+<div style="font-size:0.68rem;color:var(--text3);">[ DEMO — FICTIONAL DATA ]</div>`;
+  nb.style.display='';
+  document.getElementById('demo-checkout-btn').style.display='none';
+}
+function newTransaction(){
+  cart=[];renderCart();
+  document.getElementById('demo-receipt').innerHTML='<p style="font-size:0.78rem;color:var(--text3);">Receipt will appear here after checkout.</p>';
+  document.getElementById('demo-new-btn').style.display='none';
+}
+
+// ─── POS DEMO 2 (modal) ────────────────────────
+let cart2=[];
+function addToCart2(name,priceStr){
+  const price=parseInt(priceStr.replace('₱',''));
+  const existing=cart2.find(i=>i.name===name);
+  if(existing)existing.qty++;
+  else cart2.push({name,price,qty:1});
+  renderCart2();
+}
+function renderCart2(){
+  const ci=document.getElementById('demo-cart-items2');
+  const tot=document.getElementById('demo-total2');
+  const totVal=document.getElementById('demo-total-val2');
+  const chk=document.getElementById('demo-checkout-btn2');
+  const clr=document.getElementById('demo-clear-btn2');
+  if(!cart2.length){
+    ci.innerHTML='<p style="font-size:0.78rem;color:var(--text3);">Cart is empty.</p>';
+    tot.style.display='none';chk.style.display='none';clr.style.display='none';return;
+  }
+  ci.innerHTML=cart2.map(i=>`<div class="demo-cart-item"><span>${i.name} x${i.qty}</span><span style="color:var(--red);font-weight:700;">₱${i.price*i.qty}</span></div>`).join('');
+  const total=cart2.reduce((s,i)=>s+i.price*i.qty,0);
+  totVal.textContent='₱'+total;
+  tot.style.display='';chk.style.display='';clr.style.display='';
+}
+function clearCart2(){cart2=[];renderCart2();}
+function doCheckout2(){
+  const total=cart2.reduce((s,i)=>s+i.price*i.qty,0);
+  const r=document.getElementById('demo-receipt2');
+  const nb=document.getElementById('demo-new-btn2');
+  const now=new Date();
+  const ts=now.toLocaleString('en-PH');
+  r.innerHTML=`<div><strong>WILDCATS LOUNGE</strong></div>
+<div>Demo Receipt</div>
+<div class="r-line"></div>
+${cart2.map(i=>`<div style="display:flex;justify-content:space-between;"><span>${i.name} x${i.qty}</span><span>₱${i.price*i.qty}</span></div>`).join('')}
+<div class="r-line"></div>
+<div style="display:flex;justify-content:space-between;font-weight:700;"><span>TOTAL</span><span>₱${total}</span></div>
+<div class="r-line"></div>
+<div style="font-size:0.68rem;color:var(--text3);">${ts}</div>
+<div style="font-size:0.68rem;color:var(--text3);">[ DEMO — FICTIONAL DATA ]</div>`;
+  nb.style.display='';
+  document.getElementById('demo-checkout-btn2').style.display='none';
+}
+function newTransaction2(){
+  cart2=[];renderCart2();
+  document.getElementById('demo-receipt2').innerHTML='<p style="font-size:0.78rem;color:var(--text3);">Receipt will appear here after checkout.</p>';
+  document.getElementById('demo-new-btn2').style.display='none';
+}
+
+// ─── MODALS ────────────────────────────────────
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id);});
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal-overlay.open').forEach(m=>closeModal(m.id));
+  }
+});
+
+// ─── ASK MY PORTFOLIO ─────────────────────────
+const faqs=[
+  {q:"What projects has Anthony made?",a:"Anthony has four documented projects: (1) Wildcats Lounge — POS and Staff Management System (OOP 1 project using C#, WinForms, MS Access), (2) Wildcats Lounge — OOP 2 version (separate project, details to be added), (3) QuestKarte — Community-Driven Task and Service Marketplace Platform where Anthony was the Software Tester (CPE340 project), and (4) Kapehan — a coffee-shop discovery platform concept."},
+  {q:"What is Wildcats Lounge?",a:"Wildcats Lounge is a POS and Staff Management System. There are TWO separate Wildcats Lounge projects: one for OOP 1 (built with C#, Windows Forms, Microsoft Access, OleDb, QRCoder, SHA-256, PrintDocument) and one for OOP 2 (separate implementation — details to be added). They are not the same project."},
+  {q:"What was Anthony's role in QuestKarte?",a:"Anthony's documented role in QuestKarte was Software Tester. His responsibilities included: quality assurance, end-to-end test suite execution, bug tracking, and release validation. He also contributed to the student and professional identity verification gate and approval pipeline. He executed 18 functional test cases, all of which passed."},
+  {q:"What programming languages has Anthony learned?",a:"Anthony's confirmed programming languages are C and C++. Through his OOP projects, he has also worked with C# using Windows Forms and Microsoft Access."},
+  {q:"What academic subjects has Anthony passed?",a:"Anthony has passed all First Year and Second Year subjects, plus CPE330 and CPE340 in Summer. In Third Year, he has passed: CPE331 (Data and Digital Communications), CPE333 (Basic Occupational Safety and Health), CPE336 (CPE Laws and Professional Practice), ES038 (Technopreneurship), and GE CPE3."},
+  {q:"What is Anthony currently taking?",a:"Anthony is currently taking: CPE335 (Feedback and Control Systems), CPE361 (Logic Circuits and Design), CPE363 (Software Design), CPE381 (Computer Engineering Drafting and Design), CPEPE361 (Track Course 1: Software Development 1), and CPECC481 (CPE Comprehensive Evaluation Course 1)."},
+  {q:"What organizations has Anthony joined?",a:"Anthony has been involved in: SHS UC-CARES (President 2022-2023), UC-CARES (Member 2021-2023), Apas NHS Class President (4 years), Supreme Student Government Grade 8 Rep (2018-2019), TLE (President 2 years), University of Cebu-Banilad Class Vice-Mayor (2022-2023), Apas NHS SSG Secretary (2019-2020), Rotaract Club of Metro Cebu CIT-U Chapter (Member 2023-2024 and Disease Prevention), Interact Club of Metro Mandaue (Member 2021-2023), CIT-U SSG Commission on Extra-Curricular Activities (Member 2022-2023), UNITED for CIT University (Member 2023-Present), and ICPEP.SE CIT-U Chapter (SSG Rep, Secretary-Committee on Information Management, Project Coordinator)."},
+  {q:"What year is Anthony in?",a:"Anthony is currently a 3rd Year (Third Year) Bachelor of Science in Computer Engineering student at Cebu Institute of Technology – University."},
+  {q:"What are Anthony's achievements?",a:"Anthony's real documented achievements include: 3rd Place Poster Making (2018), 3rd Place Salad Making (2019), 4th Place Wikang Katutubo (2019), multiple volleyball placements (3rd/3rd/2nd place), Dance Palabas placements (3rd/2nd/1st place), slogan contest placements, Nutrition Month placements, Champion Speech Choir Competition at UC-B, Most Outstanding Glee Club Member (UC-B 2022-2023), Champion Intramurals Choral Speaking (2022-2023), and Team Captain Volleyball Men (2016-2020)."},
+  {q:"What is Kapehan?",a:"Kapehan is a coffee-shop discovery and community platform concept. Features include: nearby coffee-shop discovery, interactive map, coffee-shop pages with ratings and reviews, social feed, thoughts, photos, videos, and community content. Course, technologies, team members, and completion status: details to be added."},
+];
+(function(){
+  const sug=document.getElementById('ask-suggestions');
+  sug.innerHTML=faqs.slice(0,5).map(f=>`<button class="ask-suggestion" onclick="askQ('${f.q.replace(/'/g,"\\'")}')">Q: ${f.q}</button>`).join('');
+})();
+function askQ(q){
+  document.getElementById('ask-input').value=q;
+  askPortfolio();
+}
+function askPortfolio(){
+  const input=document.getElementById('ask-input').value.trim().toLowerCase();
+  const ansEl=document.getElementById('ask-answer');
+  if(!input){ansEl.style.display='none';return;}
+  let best=null,bestScore=0;
+  faqs.forEach(f=>{
+    const keywords=f.q.toLowerCase().split(' ');
+    const score=keywords.filter(k=>input.includes(k)||k.includes(input.split(' ')[0])).length;
+    if(score>bestScore){bestScore=score;best=f;}
+  });
+  // Additional keyword matching
+  const kmap=[
+    {keys:['project','built','made','create','develop'],idx:0},
+    {keys:['wildcats','lounge','pos'],idx:1},
+    {keys:['questkarte','quest','tester','role','testing'],idx:2},
+    {keys:['language','programming','c#','c++','code'],idx:3},
+    {keys:['passed','pass','complete','finish'],idx:4},
+    {keys:['taking','current','enroll'],idx:5},
+    {keys:['org','organization','club','join','member'],idx:6},
+    {keys:['year','level','year level'],idx:7},
+    {keys:['achievement','award','place','champion','won','win'],idx:8},
+    {keys:['kapehan','coffee'],idx:9},
+  ];
+  kmap.forEach(km=>{
+    if(km.keys.some(k=>input.includes(k))&&bestScore<3){
+      best=faqs[km.idx];
+    }
+  });
+  if(best){
+    ansEl.innerHTML=`<strong style="color:var(--red);font-size:0.8rem;">Q: ${best.q}</strong><br><br>${best.a}`;
+    ansEl.classList.add('show');
+    ansEl.style.display='block';
+  } else {
+    ansEl.innerHTML='<span style="color:var(--text3);">I couldn\'t find a specific answer to that question. Try asking about Anthony\'s projects, skills, academics, organizations, or achievements.</span>';
+    ansEl.classList.add('show');
+    ansEl.style.display='block';
+  }
+}
+document.getElementById('ask-input').addEventListener('keydown',e=>{if(e.key==='Enter')askPortfolio();});
+
+// ═══════════════════════════════════════════════
+// ROCKET LAB GAME
+// ═══════════════════════════════════════════════
+let gameRunning=false,gamePaused=false;
+let gameScore=0,gameHiScore=parseInt(localStorage.getItem('adl-hiscore')||'0');
+let gameLives=3,gameLevel=1;
+let rocketX=240,rocketY=490,rocketSpeed=5;
+let bullets=[],enemies=[],particles=[];
+let keys={};
+let animFrame=null;
+let lastEnemySpawn=0,enemySpawnInterval=1200;
+let fireTimer=0,fireCooldown=18;
+let levelEnemyCount=0;
+let mobileLeft=false,mobileRight=false,mobileFire=false;
+
+const canvas=document.getElementById('game-canvas');
+const ctx=canvas.getContext('2d');
+
+const ENEMY_TYPES=[
+  {type:'BUG',label:'BUG',score:10,color:'#FF6B35',size:22},
+  {type:'ERROR',label:'ERR',score:20,color:'#FF4444',size:24},
+  {type:'404',label:'404',score:30,color:'#FF8C00',size:22},
+  {type:'GLITCH',label:'GLT',score:40,color:'#AA44FF',size:26},
+  {type:'SERVER',label:'SRV',score:50,color:'#4488FF',size:28},
+  {type:'FIREWALL',label:'FWL',score:75,color:'#FF4466',size:30},
+  {type:'MALWARE',label:'MLW',score:100,color:'#FF0055',size:32},
+];
+
+function openRocketLab(){
+  document.getElementById('rocket-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('game-screen').classList.remove('hidden');
+  // Show mobile controls on touch devices
+  if('ontouchstart' in window){
+    document.getElementById('mobile-controls').style.display='flex';
+  }
+  updateHiScore();
+}
+function closeRocketLab(){
+  stopGame();
+  document.getElementById('rocket-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function updateHiScore(){document.getElementById('hud-hi').textContent=gameHiScore;}
+function startGame(){
+  document.getElementById('game-screen').classList.add('hidden');
+  gameScore=0;gameLives=3;gameLevel=1;
+  bullets=[];enemies=[];particles=[];
+  rocketX=240;rocketY=490;
+  keys={};lastEnemySpawn=0;levelEnemyCount=0;
+  enemySpawnInterval=1200;
+  gameRunning=true;gamePaused=false;
+  updateHUD();
+  if(animFrame)cancelAnimationFrame(animFrame);
+  gameLoop(performance.now());
+}
+function stopGame(){
+  gameRunning=false;
+  if(animFrame)cancelAnimationFrame(animFrame);
+}
+let lastTime=0;
+function gameLoop(ts){
+  if(!gameRunning)return;
+  if(gamePaused){animFrame=requestAnimationFrame(gameLoop);return;}
+  const dt=ts-lastTime;lastTime=ts;
+  update(dt,ts);
+  draw();
+  animFrame=requestAnimationFrame(gameLoop);
+}
+function update(dt,ts){
+  // Move rocket
+  const moveLeft=keys['ArrowLeft']||keys['a']||keys['A']||mobileLeft;
+  const moveRight=keys['ArrowRight']||keys['d']||keys['D']||mobileRight;
+  if(moveLeft)rocketX=Math.max(20,rocketX-rocketSpeed);
+  if(moveRight)rocketX=Math.min(canvas.width-20,rocketX+rocketSpeed);
+  // Fire
+  if(fireTimer>0)fireTimer--;
+  if((keys[' ']||mobileFire)&&fireTimer===0){
+    bullets.push({x:rocketX,y:rocketY-20,speed:8});
+    fireTimer=fireCooldown;
+  }
+  // Spawn enemies
+  if(ts-lastEnemySpawn>enemySpawnInterval){
+    const types=ENEMY_TYPES.slice(0,Math.min(ENEMY_TYPES.length,gameLevel+1));
+    const et=types[Math.floor(Math.random()*types.length)];
+    enemies.push({
+      x:20+Math.random()*(canvas.width-40),
+      y:-20,
+      speed:1+gameLevel*0.3+Math.random()*0.5,
+      ...et,dx:(Math.random()-0.5)*2
+    });
+    lastEnemySpawn=ts;
+    levelEnemyCount++;
+    if(levelEnemyCount>=10+gameLevel*5){
+      gameLevel++;levelEnemyCount=0;
+      enemySpawnInterval=Math.max(400,enemySpawnInterval-100);
+    }
+  }
+  // Move bullets
+  bullets=bullets.filter(b=>{b.y-=b.speed;return b.y>-10;});
+  // Move enemies
+  enemies.forEach(e=>{
+    e.y+=e.speed;
+    e.x+=e.dx;
+    if(e.x<10||e.x>canvas.width-10)e.dx*=-1;
+  });
+  // Collisions: bullet-enemy
+  bullets.forEach((b,bi)=>{
+    enemies.forEach((e,ei)=>{
+      if(Math.abs(b.x-e.x)<e.size&&Math.abs(b.y-e.y)<e.size){
+        bullets.splice(bi,1);
+        enemies.splice(ei,1);
+        gameScore+=e.score;
+        if(gameScore>gameHiScore){gameHiScore=gameScore;localStorage.setItem('adl-hiscore',gameHiScore);}
+        spawnParticles(e.x,e.y,e.color);
+        updateHUD();
+      }
+    });
+  });
+  // Enemy past bottom or hits rocket
+  enemies=enemies.filter(e=>{
+    if(e.y>canvas.height){
+      gameLives--;
+      updateHUD();
+      if(gameLives<=0)gameOver();
+      return false;
+    }
+    if(Math.abs(e.x-rocketX)<e.size&&Math.abs(e.y-rocketY)<e.size+10){
+      gameLives--;
+      spawnParticles(rocketX,rocketY,'#E02B38');
+      updateHUD();
+      if(gameLives<=0)gameOver();
+      return false;
+    }
+    return true;
+  });
+  // Particles
+  particles=particles.filter(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.life--;p.vy+=0.1;return p.life>0;
+  });
+}
+function spawnParticles(x,y,color){
+  for(let i=0;i<8;i++){
+    particles.push({x,y,vx:(Math.random()-0.5)*4,vy:(Math.random()-0.5)*4,life:25,color});
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  // Background
+  ctx.fillStyle='#000';ctx.fillRect(0,0,canvas.width,canvas.height);
+  // Stars
+  ctx.fillStyle='rgba(255,255,255,0.3)';
+  for(let i=0;i<30;i++){
+    const sx=(i*137+gameScore)%canvas.width;
+    const sy=(i*79+gameScore*0.1)%canvas.height;
+    ctx.fillRect(sx,sy,1,1);
+  }
+  // Grid
+  ctx.strokeStyle='rgba(224,43,56,0.05)';ctx.lineWidth=1;
+  for(let x=0;x<canvas.width;x+=40){
+    ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();
+  }
+  for(let y=0;y<canvas.height;y+=40){
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();
+  }
+  // Bullets
+  bullets.forEach(b=>{
+    ctx.fillStyle='#E02B38';
+    ctx.shadowColor='#E02B38';ctx.shadowBlur=8;
+    ctx.fillRect(b.x-2,b.y-8,4,12);
+    ctx.shadowBlur=0;
+  });
+  // Enemies
+  enemies.forEach(e=>{
+    ctx.fillStyle=e.color;
+    ctx.shadowColor=e.color;ctx.shadowBlur=10;
+    ctx.beginPath();ctx.arc(e.x,e.y,e.size/2,0,Math.PI*2);ctx.fill();
+    ctx.shadowBlur=0;
+    ctx.fillStyle='#000';
+    ctx.font=`bold ${Math.max(8,e.size/3)}px 'Courier New',monospace`;
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(e.label,e.x,e.y);
+  });
+  // Rocket
+  ctx.save();ctx.translate(rocketX,rocketY);
+  ctx.fillStyle='#F5F4F0';
+  ctx.beginPath();ctx.moveTo(0,-20);ctx.lineTo(10,10);ctx.lineTo(0,5);ctx.lineTo(-10,10);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#E02B38';
+  ctx.fillRect(-2,5,4,8);
+  ctx.restore();
+  // Particles
+  particles.forEach(p=>{
+    ctx.globalAlpha=p.life/25;
+    ctx.fillStyle=p.color;
+    ctx.fillRect(p.x-2,p.y-2,4,4);
+  });
+  ctx.globalAlpha=1;
+}
+function updateHUD(){
+  document.getElementById('hud-score').textContent=gameScore;
+  document.getElementById('hud-hi').textContent=gameHiScore;
+  document.getElementById('hud-level').textContent=gameLevel;
+  document.getElementById('hud-lives').textContent='♥'.repeat(Math.max(0,gameLives));
+}
+function gameOver(){
+  stopGame();
+  const gs=document.getElementById('game-screen');
+  gs.classList.remove('hidden');
+  gs.innerHTML=`
+    <div class="gs-title">SYSTEM FAILURE</div>
+    <div class="gs-sub">MISSION FAILED</div>
+    <div class="gs-score">${gameScore}</div>
+    <div style="font-size:0.75rem;color:#8E8E93;margin-bottom:1.5rem;">Final Score &nbsp;|&nbsp; Hi-Score: ${gameHiScore}</div>
+    <button class="gs-btn" onclick="startGame()">🔄 RETRY</button>
+    <button class="gs-btn outline" onclick="closeRocketLab()">← Exit Rocket Lab</button>`;
+}
+// Keyboard
+document.addEventListener('keydown',e=>{
+  keys[e.key]=true;
+  if(e.key==='Escape'&&gameRunning){
+    if(gamePaused){gamePaused=false;}
+    else{gamePaused=true;showPause();}
+  }
+});
+document.addEventListener('keyup',e=>{keys[e.key]=false;});
+function showPause(){
+  const gs=document.getElementById('game-screen');
+  gs.classList.remove('hidden');
+  gs.innerHTML=`
+    <div class="gs-title">PAUSED</div>
+    <div class="gs-sub">SYSTEM SUSPENDED</div>
+    <button class="gs-btn" onclick="resumeGame()">▶ RESUME</button>
+    <button class="gs-btn outline" onclick="closeRocketLab()">← Exit Rocket Lab</button>`;
+}
+function resumeGame(){
+  gamePaused=false;
+  document.getElementById('game-screen').classList.add('hidden');
+  lastTime=performance.now();
+  gameLoop(lastTime);
+}
+// Mobile controls
+document.getElementById('mc-left').addEventListener('touchstart',e=>{e.preventDefault();mobileLeft=true;});
+document.getElementById('mc-left').addEventListener('touchend',e=>{e.preventDefault();mobileLeft=false;});
+document.getElementById('mc-right').addEventListener('touchstart',e=>{e.preventDefault();mobileRight=true;});
+document.getElementById('mc-right').addEventListener('touchend',e=>{e.preventDefault();mobileRight=false;});
+document.getElementById('mc-fire').addEventListener('touchstart',e=>{e.preventDefault();mobileFire=true;});
+document.getElementById('mc-fire').addEventListener('touchend',e=>{e.preventDefault();mobileFire=false;});
+
+// Responsive canvas
+function resizeCanvas(){
+  const overlay=document.getElementById('rocket-overlay');
+  const availW=overlay.clientWidth;
+  const availH=overlay.clientHeight-60;
+  const scale=Math.min(availW/480,availH/540,1);
+  canvas.style.width=(480*scale)+'px';
+  canvas.style.height=(540*scale)+'px';
+}
+window.addEventListener('resize',resizeCanvas);
+resizeCanvas();
+
+// ─── MOBILE EDU LAYOUT FIX ─────────────────────
+(function(){
+  const layout=document.querySelector('.edu-layout');
+  if(layout&&window.innerWidth<700){
+    layout.style.gridTemplateColumns='1fr';
+  }
+  window.addEventListener('resize',()=>{
+    if(layout){layout.style.gridTemplateColumns=window.innerWidth<700?'1fr':'1fr 1.6fr';}
+  });
+})();
+</script>
 </body>
 </html>
